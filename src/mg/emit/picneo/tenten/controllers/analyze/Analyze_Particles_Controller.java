@@ -73,11 +73,6 @@ public class Analyze_Particles_Controller {
 	@FXML
 	public Spinner<Double> spinner_circurality_max;
 	
-	@FXML
-	public Spinner<Double> spinner_roi_x;
-	
-	@FXML
-	public Spinner<Double> spinner_roi_y;
 	
 	@FXML
 	public TableColumn<Particle_Result_Domain, Integer> tc_id;
@@ -272,7 +267,7 @@ public class Analyze_Particles_Controller {
 		Integer value_zoom = (int) scroll_zoom.getValue();
 		Integer width = image_preview.getWidth() / value_zoom;
 		
-		roi_x -= spinner_roi_x.getValue().intValue();
+		roi_x -= 5;
 		
 		if(roi_x >= 0 && roi_x <= image_preview.getWidth()) {
 			show_image_roi();
@@ -289,7 +284,7 @@ public class Analyze_Particles_Controller {
 		Integer value_zoom = (int) scroll_zoom.getValue();
 		Integer width = image_preview.getWidth() / value_zoom;
 		
-		roi_x += spinner_roi_x.getValue().intValue();
+		roi_x += 5;
 		
 		if(roi_x + width >= 0 && roi_x + width <= image_preview.getWidth()) {
 			show_image_roi();
@@ -306,7 +301,7 @@ public class Analyze_Particles_Controller {
 		Integer value_zoom = (int) scroll_zoom.getValue();
 		Integer height = image_preview.getHeight() / value_zoom;
 		
-		roi_y -= spinner_roi_y.getValue().intValue();
+		roi_y -= 5;
 		
 		if(roi_y >= 0 && roi_y + height <= image_preview.getHeight()) {
 			show_image_roi();
@@ -323,7 +318,7 @@ public class Analyze_Particles_Controller {
 		Integer value_zoom = (int) scroll_zoom.getValue();
 		Integer height = image_preview.getHeight() / value_zoom;
 		
-		roi_y += spinner_roi_y.getValue().intValue();
+		roi_y += 5;
 		
 		if(roi_y + height >= 0 && roi_y + height <= image_preview.getHeight()) {
 			show_image_roi();

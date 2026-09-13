@@ -60,14 +60,7 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </HBox.margin>
                   </Label>
-                  <Spinner fx:id="spinner_roi_x" nodeOrientation="RIGHT_TO_LEFT" prefHeight="26.0" prefWidth="100.0">
-                     <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="25.0" top="5.0" />
-                     </HBox.margin>
-                     <valueFactory>
-                        <SpinnerValueFactory.DoubleSpinnerValueFactory amountToStepBy="1" initialValue="5" max="100" min="1" />
-                     </valueFactory>
-                  </Spinner>
+
                   <Label fx:id="label_roi_x" alignment="CENTER_RIGHT" prefHeight="27.0" prefWidth="40.0" text="0">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -92,14 +85,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Spinner fx:id="spinner_roi_y" nodeOrientation="LEFT_TO_RIGHT" prefHeight="26.0" prefWidth="100.0">
-                     <HBox.margin>
-                        <Insets bottom="5.0" left="25.0" right="5.0" top="5.0" />
-                     </HBox.margin>
-                     <valueFactory>
-                        <SpinnerValueFactory.DoubleSpinnerValueFactory amountToStepBy="1" initialValue="5" max="100" min="1" />
-                     </valueFactory>
-                  </Spinner>
+
                   <Label text="Y">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

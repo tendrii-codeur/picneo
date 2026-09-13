@@ -2,7 +2,7 @@ package mg.emit.picneo.tenten.controllers;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import javafx.scene.control.SpinnerValueFactory;
+
 
 import mg.emit.picneo.tenten.controllers.analyze.Analyze_Particles_Controller;
 import mg.emit.picneo.tenten.controllers.file.File_SaveAs_Controller;
@@ -40,7 +40,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollBar;
-import javafx.scene.control.Spinner;
+
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
@@ -175,11 +175,6 @@ public class Main_Controller {
     @FXML
     public ScrollBar scroll_zoom;
 
-    @FXML
-    public Spinner<Double> spinner_roi_x;
-
-    @FXML
-    public Spinner<Double> spinner_roi_y;
 
     @FXML
     public TableColumn<String, String> tc_current_image_type;
@@ -229,8 +224,6 @@ public class Main_Controller {
         initialize_imageView_arrays();
         initialize_textField_stack();
         default_image = iv_1.getImage();
-        spinner_roi_x.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(1.0, 100.0, 5.0, 1.0));
-        spinner_roi_y.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(1.0, 100.0, 5.0, 1.0));
     }
 
     public void initialize_imageView_arrays() {
@@ -1082,7 +1075,7 @@ public class Main_Controller {
         Integer value_zoom = (int) scroll_zoom.getValue();
         Integer width = current_image.getWidth() / value_zoom;
 
-        roi_x -= spinner_roi_x.getValue().intValue();
+        roi_x -= 5;
 
         if (roi_x >= 0 && roi_x <= current_image.getWidth()) {
             show_image_roi();
@@ -1098,7 +1091,7 @@ public class Main_Controller {
         Integer value_zoom = (int) scroll_zoom.getValue();
         Integer width = current_image.getWidth() / value_zoom;
 
-        roi_x += spinner_roi_x.getValue().intValue();
+        roi_x += 5;
 
         if (roi_x + width >= 0 && roi_x + width <= current_image.getWidth()) {
             show_image_roi();
@@ -1114,7 +1107,7 @@ public class Main_Controller {
         Integer value_zoom = (int) scroll_zoom.getValue();
         Integer height = current_image.getHeight() / value_zoom;
 
-        roi_y -= spinner_roi_y.getValue().intValue();
+        roi_y -= 5;
 
         if (roi_y >= 0 && roi_y + height <= current_image.getHeight()) {
             show_image_roi();
@@ -1130,7 +1123,7 @@ public class Main_Controller {
         Integer value_zoom = (int) scroll_zoom.getValue();
         Integer height = current_image.getHeight() / value_zoom;
 
-        roi_y += spinner_roi_y.getValue().intValue();
+        roi_y += 5;
 
         if (roi_y + height >= 0 && roi_y + height <= current_image.getHeight()) {
             show_image_roi();
