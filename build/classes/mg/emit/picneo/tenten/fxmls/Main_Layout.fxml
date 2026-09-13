@@ -616,67 +616,6 @@
                   </Button>
                </children>
             </HBox>
-            <HBox fx:id="hbox_stack" alignment="CENTER" prefHeight="34.0" prefWidth="596.0">
-               <children>
-                  <Label text="C">
-                     <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font name="System Bold" size="16.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="tf_stack_channel" alignment="CENTER" minWidth="45.0" onAction="#getImageStackPosition" prefWidth="45.0" text="1">
-                     <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin>
-                  </TextField>
-                  <Label fx:id="label_stack_channel" alignment="CENTER" minWidth="45.0" prefWidth="45.0" text="(1)">
-                     <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin>
-                  </Label>
-                  <Label text="S">
-                     <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font name="System Bold" size="16.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="tf_stack_slice" alignment="CENTER" minWidth="45.0" onAction="#getImageStackPosition" prefWidth="45.0" text="1">
-                     <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin>
-                  </TextField>
-                  <Label fx:id="label_stack_slice" alignment="CENTER" minWidth="45.0" prefWidth="45.0" text="(1)">
-                     <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin>
-                  </Label>
-                  <Label text="F">
-                     <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font name="System Bold" size="16.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="tf_stack_frame" alignment="CENTER" minWidth="45.0" onAction="#getImageStackPosition" prefWidth="45.0" text="1">
-                     <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin>
-                  </TextField>
-                  <Label fx:id="label_stack_frame" alignment="CENTER" minWidth="45.0" prefWidth="45.0" text="(1)">
-                     <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin>
-                  </Label>
-               </children>
-               <VBox.margin>
-                  <Insets top="5.0" />
-               </VBox.margin>
-            </HBox>
          </children>
          <BorderPane.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

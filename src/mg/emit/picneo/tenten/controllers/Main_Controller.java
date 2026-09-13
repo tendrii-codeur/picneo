@@ -30,6 +30,7 @@ import javafx.application.Platform;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -44,12 +45,11 @@ import javafx.scene.control.ScrollBar;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -69,18 +69,6 @@ public class Main_Controller {
 
     @FXML
     public Button button_image_statistics_rgb_roi;
-
-    @FXML
-    public HBox hbox_stack;
-
-    @FXML
-    public Label label_stack_channel;
-
-    @FXML
-    public Label label_stack_frame;
-
-    @FXML
-    public Label label_stack_slice;
 
     @FXML
     public Label label_roi_x;
@@ -192,15 +180,6 @@ public class Main_Controller {
     public TextArea ta_current_image;
 
     @FXML
-    public TextField tf_stack_channel;
-
-    @FXML
-    public TextField tf_stack_frame;
-
-    @FXML
-    public TextField tf_stack_slice;
-
-    @FXML
     public VBox vbox_current_image_1;
 
     @FXML
@@ -214,6 +193,12 @@ public class Main_Controller {
     private Integer roi_x = 0;
     private Integer roi_y = 0;
 
+    private boolean imagePanActive;
+    private double imagePanStartX;
+    private double imagePanStartY;
+    private int imagePanStartRoiX;
+    private int imagePanStartRoiY;
+
     private ImagePlus current_image;
     private ImagePlus stitching_result;
 
@@ -222,7 +207,7 @@ public class Main_Controller {
     @FXML
     public void initialize() {
         initialize_imageView_arrays();
-        initialize_textField_stack();
+        initialize_image_pan();
         default_image = iv_1.getImage();
     }
 
@@ -239,69 +224,100 @@ public class Main_Controller {
         iv_array.add(iv_9);
     }
 
-    public void initialize_textField_stack() {
+    private void initialize_image_pan() {
 
-        tf_stack_channel.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue.matches("\\d*")) {
-                return;
-            }
-            tf_stack_channel.setText("1");
+        iv_current_image.setOnMouseEntered(e -> updateImagePanCursor());
+        iv_current_image.setOnMouseExited(e -> {
+            imagePanActive = false;
+            iv_current_image.setCursor(Cursor.DEFAULT);
         });
-        tf_stack_frame.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue.matches("\\d*")) {
-                return;
-            }
-            tf_stack_frame.setText("1");
-        });
-        tf_stack_slice.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue.matches("\\d*")) {
-                return;
-            }
-            tf_stack_slice.setText("1");
-        });
+        iv_current_image.setOnMousePressed(this::imagePanMousePressed);
+        iv_current_image.setOnMouseDragged(this::imagePanMouseDragged);
+        iv_current_image.setOnMouseReleased(this::imagePanMouseReleased);
     }
 
-    @FXML
-    public void getImageStackPosition() {
+    private boolean isImagePanEnabled() {
+        return current_image != null && (int) scroll_zoom.getValue() > 1;
+    }
 
-        if (tf_stack_channel.getText().isEmpty()) {
-            tf_stack_channel.setText("1");
+    private void updateImagePanCursor() {
+        if (isImagePanEnabled()) {
+            iv_current_image.setCursor(imagePanActive ? Cursor.CLOSED_HAND : Cursor.OPEN_HAND);
+        } else {
+            iv_current_image.setCursor(Cursor.DEFAULT);
         }
-        if (tf_stack_frame.getText().isEmpty()) {
-            tf_stack_frame.setText("1");
-        }
-        if (tf_stack_slice.getText().isEmpty()) {
-            tf_stack_slice.setText("1");
-        }
+    }
 
-        Integer channel = Integer.valueOf(tf_stack_channel.getText());
-        Integer frame = Integer.valueOf(tf_stack_frame.getText());
-        Integer slice = Integer.valueOf(tf_stack_slice.getText());
+    private void clampRoiToImage() {
 
-        if (channel < 1 || channel > current_image.getNChannels()) {
-            channel = 1;
-            tf_stack_channel.setText("1");
-        }
-        if (frame < 1 || frame > current_image.getNFrames()) {
-            frame = 1;
-            tf_stack_frame.setText("1");
-        }
-        if (slice < 1 || slice > current_image.getNSlices()) {
-            slice = 1;
-            tf_stack_slice.setText("1");
+        if (current_image == null) {
+            return;
         }
 
-        position = channel * frame * slice;
+        int valueZoom = (int) scroll_zoom.getValue();
+        if (valueZoom <= 1) {
+            roi_x = 0;
+            roi_y = 0;
+            return;
+        }
 
-        Image image_preview_fx = SwingFXUtils.toFXImage(current_image.getImageStack().getProcessor(position).getBufferedImage(), null);
-        iv_current_image.setImage(image_preview_fx);
+        int viewportW = current_image.getWidth() / valueZoom;
+        int viewportH = current_image.getHeight() / valueZoom;
+        int maxX = Math.max(0, current_image.getWidth() - viewportW);
+        int maxY = Math.max(0, current_image.getHeight() - viewportH);
 
-        ImagePlus current_histogram = new ImagePlus();
-        current_histogram.setProcessor(current_image.getImageStack().getProcessor(position));
+        roi_x = Math.max(0, Math.min(roi_x, maxX));
+        roi_y = Math.max(0, Math.min(roi_y, maxY));
+    }
 
-        HistogramWindow histogram = new HistogramWindow(current_histogram);
-        Image image_preview_histogram = SwingFXUtils.toFXImage(histogram.getImagePlus().getBufferedImage(), null);
-        iv_current_histogram.setImage(image_preview_histogram);
+    private void imagePanMousePressed(MouseEvent event) {
+
+        if (!isImagePanEnabled()) {
+            return;
+        }
+
+        imagePanActive = true;
+        imagePanStartX = event.getX();
+        imagePanStartY = event.getY();
+        imagePanStartRoiX = roi_x;
+        imagePanStartRoiY = roi_y;
+        iv_current_image.setCursor(Cursor.CLOSED_HAND);
+        event.consume();
+    }
+
+    private void imagePanMouseDragged(MouseEvent event) {
+
+        if (!imagePanActive || !isImagePanEnabled()) {
+            return;
+        }
+
+        int valueZoom = (int) scroll_zoom.getValue();
+        double displayW = iv_current_image.getBoundsInLocal().getWidth();
+        double displayH = iv_current_image.getBoundsInLocal().getHeight();
+
+        if (displayW <= 0 || displayH <= 0) {
+            return;
+        }
+
+        double scaleX = (current_image.getWidth() / (double) valueZoom) / displayW;
+        double scaleY = (current_image.getHeight() / (double) valueZoom) / displayH;
+
+        roi_x = imagePanStartRoiX - (int) Math.round((event.getX() - imagePanStartX) * scaleX);
+        roi_y = imagePanStartRoiY - (int) Math.round((event.getY() - imagePanStartY) * scaleY);
+        clampRoiToImage();
+        show_image_roi();
+        event.consume();
+    }
+
+    private void imagePanMouseReleased(MouseEvent event) {
+
+        if (!imagePanActive) {
+            return;
+        }
+
+        imagePanActive = false;
+        updateImagePanCursor();
+        event.consume();
     }
 
     @FXML
@@ -1164,6 +1180,7 @@ public class Main_Controller {
 
         label_roi_x.setText(roi_x.toString());
         label_roi_y.setText(roi_y.toString());
+        updateImagePanCursor();
     }
 
     @FXML
@@ -1347,29 +1364,6 @@ public class Main_Controller {
         }
     }
 
-    private void checkIfImageIsStack() {
-
-        if (current_image.getNChannels() > 1) {
-            label_stack_channel.setText("(" + current_image.getNChannels() + ")");
-        } else {
-            label_stack_channel.setText("(1)");
-        }
-        if (current_image.getNFrames() > 1) {
-            label_stack_frame.setText("(" + current_image.getNFrames() + ")");
-        } else {
-            label_stack_frame.setText("(1)");
-        }
-        if (current_image.getNSlices() > 1) {
-            label_stack_slice.setText("(" + current_image.getNSlices() + ")");
-        } else {
-            label_stack_slice.setText("(1)");
-        }
-
-        tf_stack_channel.setText("1");
-        tf_stack_frame.setText("1");
-        tf_stack_slice.setText("1");
-    }
-
     private void onImageOpened() {
 
         analyze_particles.setDisable(false);
@@ -1426,14 +1420,6 @@ public class Main_Controller {
 
         button_image_statistics_rgb.setDisable(true);
         button_image_statistics_rgb_roi.setDisable(true);
-
-        label_stack_channel.setText("(1)");
-        label_stack_frame.setText("(1)");
-        label_stack_slice.setText("(1)");
-
-        tf_stack_channel.setText("1");
-        tf_stack_frame.setText("1");
-        tf_stack_slice.setText("1");
     }
 
     private void setCurrentImage(Integer id) {
@@ -1463,7 +1449,6 @@ public class Main_Controller {
             show_image_roi();
             getImageStats(current_image);
             onImageOpened();
-            checkIfImageIsStack();
         }
     }
 
