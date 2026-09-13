@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="picneo.jnlp">
+  <information>
+    <title>picneo</title>
+    <vendor>TENDRY</vendor>
+    <description>null</description>
+    <offline-allowed/>
+  </information>
+  <resources>
+    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="lib\Fiji_Plugins.jar" size="80766" download="eager" />
+    <jar href="lib\Jama-1.0.3.jar" size="35981" download="eager" />
+    <jar href="lib\Stitching_.jar" size="171098" download="eager" />
+    <jar href="lib\edu_mines_jtk.jar" size="1341482" download="eager" />
+    <jar href="lib\fiji-lib.jar" size="73032" download="eager" />
+    <jar href="lib\ij.jar" size="2400401" download="eager" />
+    <jar href="lib\imglib-algorithms.jar" size="172177" download="eager" />
+    <jar href="lib\imglib-ij.jar" size="35770" download="eager" />
+    <jar href="lib\imglib.jar" size="281958" download="eager" />
+    <jar href="lib\loci_tools.jar" size="9861744" download="eager" />
+    <jar href="lib\mpicbg.jar" size="258355" download="eager" />
+    <jar href="picneo.jar" size="547692" download="eager" />
+  </resources>
+  <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="picneo" >
+    <param name="requiredFXVersion" value="8.0+"/>
+  </applet-desc>
+  <jfx:javafx-desc  width="800" height="600" main-class="mg.emit.picneo.tenten.main.Main"  name="picneo" />
+  <update check="always"/>
+</jnlp>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="270.0" prefWidth="460.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mg.emit.picneo.tenten.controllers.file.File_SaveAs_Controller">
+   <children>
+      <Label text="Choose save option">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+         <VBox.margin>
+            <Insets top="15.0" />
+         </VBox.margin>
+      </Label>
+      <HBox alignment="CENTER" prefHeight="203.0" prefWidth="575.0">
+         <children>
+            <VBox alignment="CENTER" prefHeight="127.0" prefWidth="100.0">
+               <children>
+                  <Button fx:id="button_save" mnemonicParsing="false" onAction="#file_saveImage" prefHeight="50.0" prefWidth="100.0" text="Default">
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button fx:id="button_save_jpeg" mnemonicParsing="false" onAction="#file_saveImageAsJpeg" prefHeight="50.0" prefWidth="100.0" text="JPEG">
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button fx:id="button_save_raw" mnemonicParsing="false" onAction="#file_saveImageAsRaw" prefHeight="50.0" prefWidth="100.0" text="RAW">
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Button fx:id="button_save_bmp" mnemonicParsing="false" onAction="#file_saveImageAsBmp" prefHeight="50.0" prefWidth="100.0" text="BMP">
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button fx:id="button_save_lut" mnemonicParsing="false" onAction="#file_saveImageAsLut" prefHeight="50.0" prefWidth="100.0" text="LUT">
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button fx:id="button_save_text" mnemonicParsing="false" onAction="#file_saveImageAsText" prefHeight="50.0" prefWidth="100.0" text="TEXT">
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" layoutX="110.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Button fx:id="button_save_fits" mnemonicParsing="false" onAction="#file_saveImageAsFits" prefHeight="50.0" prefWidth="100.0" text="FITS">
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button fx:id="button_save_pgm" mnemonicParsing="false" onAction="#file_saveImageAsPgm" prefHeight="50.0" prefWidth="100.0" text="PGM">
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button fx:id="button_save_tiff" mnemonicParsing="false" onAction="#file_saveImageAsTiff" prefHeight="50.0" prefWidth="100.0" text="TIFF">
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" layoutX="210.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Button fx:id="button_save_gif" mnemonicParsing="false" onAction="#file_saveImageAsGif" prefHeight="50.0" prefWidth="100.0" text="GIF">
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button fx:id="button_save_png" mnemonicParsing="false" onAction="#file_saveImageAsPng" prefHeight="50.0" prefWidth="100.0" text="PNG">
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button fx:id="button_save_zip" mnemonicParsing="false" onAction="#file_saveImageAsZip" prefHeight="50.0" prefWidth="100.0" text="ZIP">
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+            </VBox>
+         </children>
+         <VBox.margin>
+            <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+         </VBox.margin>
+      </HBox>
+   </children>
+</VBox>
