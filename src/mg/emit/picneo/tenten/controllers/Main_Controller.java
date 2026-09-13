@@ -1544,7 +1544,34 @@ public class Main_Controller {
     public void getImageStats(ImagePlus ip) {
 
         ImageInfo ii = new ImageInfo();
-        ta_current_image.setText(ii.getImageInfo(ip));
+        String info = ii.getImageInfo(ip);
+        if (info != null) {
+            info = info.replace("Title:", "Titre :")
+                       .replace("Width:", "Largeur :")
+                       .replace("Height:", "Hauteur :")
+                       .replace("Size:", "Taille :")
+                       .replace("Type:", "Type :")
+                       .replace("Bits per pixel:", "Bits par pixel :")
+                       .replace("Display range:", "Plage d'affichage :")
+                       .replace("Channels:", "Canaux :")
+                       .replace("Slices:", "Coupes :")
+                       .replace("Frames:", "Trames :")
+                       .replace("No pixels are selected", "Aucun pixel sélectionné")
+                       .replace("Selection:", "Sélection :")
+                       .replace("Mean:", "Moyenne :")
+                       .replace("StdDev:", "Écart type :")
+                       .replace("Min:", "Min :")
+                       .replace("Max:", "Max :")
+                       .replace("Mode:", "Mode :")
+                       .replace("Count:", "Nombre :")
+                       .replace("Pixels:", "Pixels :")
+                       .replace("Uncalibrated", "Non étalonné")
+                       .replace("Inverted LUT", "LUT inversée")
+                       .replace("Resolution:", "Résolution :")
+                       .replace("Voxel size:", "Taille du voxel :")
+                       .replace("Field of view:", "Champ de vision :");
+        }
+        ta_current_image.setText(info);
     }
 
     public void setImage(ArrayList<ImagePlus> array) {
