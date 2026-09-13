@@ -123,8 +123,8 @@ public class Stitching_Pairwise_Controller {
 	@FXML
 	public void executeStitching() throws RuntimeException, InvocationTargetException{
 		
-		Alert alert = new Alert(AlertType.INFORMATION, "Click on images that are opened right now!");
-		alert.setTitle("Warning!");
+		Alert alert = new Alert(AlertType.INFORMATION, "Cliquez sur les images qui sont actuellement ouvertes !");
+		alert.setTitle("Avertissement !");
 		alert.show();
 		
 		ImagePlus ip1 = new ImagePlus();

@@ -28,7 +28,7 @@
                   </ImageView>
                </graphic>
                <tooltip>
-                  <Tooltip text="Adjust &amp; Exit" />
+                  <Tooltip text="Ajuster et Fermer" />
                </tooltip>
             </Button>
             <Button fx:id="button_reset" minHeight="60.0" minWidth="60.0" mnemonicParsing="false" onAction="#button_reset_action_event" onKeyReleased="#imageView_preview_drag_over" onMouseClicked="#imageView_preview_drag_over" prefHeight="60.0" prefWidth="60.0">
@@ -43,7 +43,7 @@
                   </ImageView>
                </graphic>
                <tooltip>
-                  <Tooltip text="Reset" />
+                  <Tooltip text="Réinitialiser" />
                </tooltip>
             </Button>
             <Button fx:id="button_cancel" minHeight="60.0" minWidth="60.0" mnemonicParsing="false" onAction="#button_cancel_action_event" prefHeight="60.0" prefWidth="60.0">
@@ -58,7 +58,7 @@
                   </ImageView>
                </graphic>
                <tooltip>
-                  <Tooltip text="Exit" />
+                  <Tooltip text="Fermer" />
                </tooltip>
             </Button>
          </children>
@@ -122,7 +122,7 @@
    <center>
       <VBox alignment="CENTER" minHeight="350.0" minWidth="500.0" prefHeight="350.0" prefWidth="500.0" BorderPane.alignment="CENTER">
          <children>
-            <Label text="Result">
+            <Label text="Résultat">
                <VBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </VBox.margin>
@@ -147,7 +147,7 @@
    <right>
       <VBox alignment="CENTER" minHeight="350.0" prefHeight="350.0" prefWidth="250.0" BorderPane.alignment="CENTER">
          <children>
-            <Label text="Result Histogram">
+            <Label text="Histogramme du résultat">
                <VBox.margin>
                   <Insets bottom="25.0" left="5.0" right="5.0" top="-15.0" />
                </VBox.margin>

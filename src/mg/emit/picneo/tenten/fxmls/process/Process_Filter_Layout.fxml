@@ -29,7 +29,7 @@
          <children>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Radius pixels" wrappingWidth="160.0">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Rayon (pixels)" wrappingWidth="160.0">
                      <HBox.margin>
                         <Insets bottom="20.0" right="20.0" top="20.0" />
                      </HBox.margin>
@@ -46,7 +46,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Filter types" wrappingWidth="160.0">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Types de filtres" wrappingWidth="160.0">
                      <HBox.margin>
                         <Insets bottom="20.0" right="20.0" top="20.0" />
                      </HBox.margin>
@@ -75,7 +75,7 @@
                         </ImageView>
                      </graphic>
                      <tooltip>
-                        <Tooltip text="Apply" />
+                        <Tooltip text="Appliquer" />
                      </tooltip>
                   </Button>
                   <Button fx:id="button_reset" layoutX="193.0" layoutY="20.0" mnemonicParsing="false" onAction="#button_reset_action_event" prefHeight="45.0" prefWidth="45.0">
@@ -87,7 +87,7 @@
                         </ImageView>
                      </graphic>
                      <tooltip>
-                        <Tooltip text="Reset" />
+                        <Tooltip text="Réinitialiser" />
                      </tooltip>
                   </Button>
                   <Button fx:id="button_cancel" mnemonicParsing="false" onAction="#button_cancel_action_event" prefHeight="45.0" prefWidth="45.0">
@@ -102,7 +102,7 @@
                         </ImageView>
                      </graphic>
                      <tooltip>
-                        <Tooltip text="Exit" />
+                        <Tooltip text="Fermer" />
                      </tooltip>
                   </Button>
                </children>

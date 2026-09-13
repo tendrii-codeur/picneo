@@ -30,16 +30,16 @@ public class Main extends Application {
 			
 			Scene scene = new Scene(root);
 			
-			primaryStage.setTitle("Image Processor with ImageJ Framework - WIP");
+			primaryStage.setTitle("PICNEO");
 			primaryStage.setResizable(false);
 			primaryStage.setScene(scene);
 			primaryStage.show();
 			
 			primaryStage.setOnCloseRequest(e -> {
 			
-				Alert alert = new Alert(AlertType.WARNING, "Do you want to close program? Any unsaved changes will be lost!", 
+				Alert alert = new Alert(AlertType.WARNING, "Voulez-vous fermer le programme ? Toutes les modifications non enregistrées seront perdues !", 
 								ButtonType.NO, ButtonType.YES);
-				alert.setTitle("Warning!");
+				alert.setTitle("Avertissement !");
 				alert.showAndWait().ifPresent(type -> {
 					
 					if(type == ButtonType.YES) {

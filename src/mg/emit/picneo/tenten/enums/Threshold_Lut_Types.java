@@ -4,10 +4,10 @@ import ij.process.ImageProcessor;
 
 public enum Threshold_Lut_Types {
 
-	RED_LUT("Red Lut", ImageProcessor.RED_LUT), 
-	BLACK_AND_WHITE_LUT("Black and White Luti", ImageProcessor.BLACK_AND_WHITE_LUT), 
-	NO_LUT_UPDATE("No Lut update", ImageProcessor.NO_LUT_UPDATE),
-	OVER_UNDER_LUT("Over under Lut", ImageProcessor.OVER_UNDER_LUT);
+	RED_LUT("LUT Rouge", ImageProcessor.RED_LUT), 
+	BLACK_AND_WHITE_LUT("LUT Noir et Blanc", ImageProcessor.BLACK_AND_WHITE_LUT), 
+	NO_LUT_UPDATE("Pas de mise à jour LUT", ImageProcessor.NO_LUT_UPDATE),
+	OVER_UNDER_LUT("LUT Sur/Sous exposition", ImageProcessor.OVER_UNDER_LUT);
 	
 	private final String displayLutName;
 	private final Integer displayLutValue;

@@ -9,7 +9,7 @@
 
 <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="270.0" prefWidth="460.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mg.emit.picneo.tenten.controllers.file.File_SaveAs_Controller">
    <children>
-      <Label text="Choose save option">
+      <Label text="Choisir l'option d'enregistrement">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -21,7 +21,7 @@
          <children>
             <VBox alignment="CENTER" prefHeight="127.0" prefWidth="100.0">
                <children>
-                  <Button fx:id="button_save" mnemonicParsing="false" onAction="#file_saveImage" prefHeight="50.0" prefWidth="100.0" text="Default">
+                  <Button fx:id="button_save" mnemonicParsing="false" onAction="#file_saveImage" prefHeight="50.0" prefWidth="100.0" text="Par défaut">
                      <VBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </VBox.margin>

@@ -2,7 +2,7 @@ package mg.emit.picneo.tenten.enums;
 
 public enum Threshold_Method_Types {
 
-	DEFAULT("Default"), 
+	DEFAULT("Par défaut"), 
 	HUANG("Huang"),
 	INTERMODES("Intermodes"),
 	ISODATA("IsoData"), 

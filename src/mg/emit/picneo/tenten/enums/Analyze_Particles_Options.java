@@ -4,9 +4,9 @@ import ij.plugin.filter.ParticleAnalyzer;
 
 public enum Analyze_Particles_Options {
 
-	ROI_MASKS("Roi Masks", ParticleAnalyzer.SHOW_ROI_MASKS),
-	OUTLINES("Outlines", ParticleAnalyzer.SHOW_OUTLINES),
-	MASKS("Masks", ParticleAnalyzer.SHOW_MASKS);
+	ROI_MASKS("Masques ROI", ParticleAnalyzer.SHOW_ROI_MASKS),
+	OUTLINES("Contours", ParticleAnalyzer.SHOW_OUTLINES),
+	MASKS("Masques", ParticleAnalyzer.SHOW_MASKS);
 	
 	private final String displayOptionName;
 	private final Integer displayOptionValue;

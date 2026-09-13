@@ -329,7 +329,7 @@ public class Main_Controller {
             stage.setResizable(false);
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initStyle(StageStyle.UTILITY);
-            stage.setTitle("RGB Statistics for " + current_image.getTitle());
+            stage.setTitle("Statistiques RGB pour " + current_image.getTitle());
             stage.setScene(new Scene(root));
 
             stage.showAndWait();
@@ -371,7 +371,7 @@ public class Main_Controller {
             stage.setResizable(false);
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initStyle(StageStyle.UTILITY);
-            stage.setTitle("ROI RGB Statistics for " + current_image.getTitle());
+            stage.setTitle("Statistiques RGB de la ROI pour " + current_image.getTitle());
             stage.setScene(new Scene(root));
 
             stage.showAndWait();
@@ -397,8 +397,8 @@ public class Main_Controller {
 
     private void analyze_particles_alert() {
 
-        Alert alert = new Alert(AlertType.WARNING, "A thresholded image is required!", ButtonType.OK);
-        alert.setTitle("Warning!");
+        Alert alert = new Alert(AlertType.WARNING, "Une image seuillée est requise !", ButtonType.OK);
+        alert.setTitle("Avertissement !");
         alert.showAndWait();
     }
 
@@ -420,7 +420,7 @@ public class Main_Controller {
             stage.setResizable(false);
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initStyle(StageStyle.UTILITY);
-            stage.setTitle("Analyze Particles for " + current_image.getTitle());
+            stage.setTitle("Analyse des particules pour " + current_image.getTitle());
             stage.setScene(new Scene(root));
 
             stage.showAndWait();
@@ -432,10 +432,10 @@ public class Main_Controller {
     @FXML
     public void file_closeImage() {
 
-        Alert alert = new Alert(AlertType.CONFIRMATION, "Do you want to save before closing?",
+        Alert alert = new Alert(AlertType.CONFIRMATION, "Voulez-vous enregistrer avant de fermer ?",
                 ButtonType.NO, ButtonType.OK, ButtonType.CANCEL);
 
-        alert.setTitle("Alert!");
+        alert.setTitle("Alerte !");
 
         alert.showAndWait().ifPresent(type -> {
 
@@ -460,10 +460,10 @@ public class Main_Controller {
 
         IJ.save(ip_array.get(id), path);
 
-        Alert alert = new Alert(AlertType.INFORMATION, "Image" + " " + ip_array.get(id).getTitle() + " " + "saved!",
+        Alert alert = new Alert(AlertType.INFORMATION, "L'image " + ip_array.get(id).getTitle() + " a été enregistrée !",
                 ButtonType.OK);
 
-        alert.setTitle("Alert!");
+        alert.setTitle("Alerte !");
         alert.showAndWait();
     }
 
@@ -496,10 +496,10 @@ public class Main_Controller {
     @FXML
     public void file_closeAllImage() {
 
-        Alert alert = new Alert(AlertType.CONFIRMATION, "Do you want to save before closing all images?",
+        Alert alert = new Alert(AlertType.CONFIRMATION, "Voulez-vous enregistrer avant de fermer toutes les images ?",
                 ButtonType.NO, ButtonType.OK, ButtonType.CANCEL);
 
-        alert.setTitle("Alert!");
+        alert.setTitle("Alerte !");
         alert.showAndWait().ifPresent(type -> {
 
             if (type == ButtonType.OK || type == ButtonType.NO) {
@@ -532,10 +532,10 @@ public class Main_Controller {
             IJ.save(ip_array.get(i), path);
         }
 
-        Alert alert_save = new Alert(AlertType.INFORMATION, "All Images" + " " + "are" + " " + "saved!",
+        Alert alert_save = new Alert(AlertType.INFORMATION, "Toutes les images ont été enregistrées !",
                 ButtonType.OK);
 
-        alert_save.setTitle("Alert!");
+        alert_save.setTitle("Alerte !");
         alert_save.showAndWait();
     }
 
@@ -551,8 +551,8 @@ public class Main_Controller {
             } catch (NullPointerException e) {
             }
         } else {
-            Alert alert = new Alert(AlertType.WARNING, "Maximum capacity reached! Please close other images!", ButtonType.OK);
-            alert.setTitle("Warning!");
+            Alert alert = new Alert(AlertType.WARNING, "Capacité maximale atteinte ! Veuillez fermer d'autres images !", ButtonType.OK);
+            alert.setTitle("Avertissement !");
             alert.showAndWait();
         }
     }
@@ -566,8 +566,8 @@ public class Main_Controller {
 
             if (image.getTitle().equals(ip_array.get(i).getTitle())) {
 
-                Alert alert = new Alert(AlertType.WARNING, "You have already opened the same image!", ButtonType.OK);
-                alert.setTitle("ImageJ Warning!");
+                Alert alert = new Alert(AlertType.WARNING, "Vous avez déjà ouvert la même image !", ButtonType.OK);
+                alert.setTitle("Avertissement ImageJ !");
                 alert.showAndWait();
 
                 same_image_check = true;
@@ -602,10 +602,10 @@ public class Main_Controller {
 
         setCurrentImage(id);
 
-        Alert alert = new Alert(AlertType.INFORMATION, "Image" + " " + ip_array.get(id).getTitle() + " " + "saved!",
+        Alert alert = new Alert(AlertType.INFORMATION, "L'image " + ip_array.get(id).getTitle() + " a été enregistrée !",
                 ButtonType.OK);
 
-        alert.setTitle("Alert!");
+        alert.setTitle("Alerte !");
         alert.showAndWait();
     }
 
@@ -623,10 +623,10 @@ public class Main_Controller {
 
         setCurrentImage(id);
 
-        Alert alert = new Alert(AlertType.INFORMATION, "All Images" + " " + "are" + " " + "saved!",
+        Alert alert = new Alert(AlertType.INFORMATION, "Toutes les images ont été enregistrées !",
                 ButtonType.OK);
 
-        alert.setTitle("Alert!");
+        alert.setTitle("Alerte !");
         alert.showAndWait();
     }
 
@@ -646,7 +646,7 @@ public class Main_Controller {
             stage.setResizable(false);
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initStyle(StageStyle.UTILITY);
-            stage.setTitle("Save option for " + current_image.getTitle());
+            stage.setTitle("Option d'enregistrement pour " + current_image.getTitle());
             stage.setScene(new Scene(root));
 
             stage.showAndWait();
@@ -662,11 +662,10 @@ public class Main_Controller {
     @FXML
     public void file_quit() {
 
-        Alert alert = new Alert(AlertType.WARNING, "Do you want to close program?" + "\n" + ""
-                + "Any unsaved changes will be lost!",
+        Alert alert = new Alert(AlertType.WARNING, "Voulez-vous fermer le programme ?\nToutes les modifications non enregistrées seront perdues !",
                 ButtonType.NO, ButtonType.YES);
         alert.setWidth(600);
-        alert.setTitle("Warning!");
+        alert.setTitle("Avertissement !");
         alert.showAndWait().ifPresent(type -> {
 
             if (type == ButtonType.YES) {
@@ -695,7 +694,7 @@ public class Main_Controller {
             stage.setResizable(false);
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initStyle(StageStyle.UTILITY);
-            stage.setTitle("Adjust Brightness/Contrast for " + current_image.getTitle());
+            stage.setTitle("Ajuster Luminosité/Contraste pour " + current_image.getTitle());
             stage.setScene(new Scene(root));
 
             stage.showAndWait();
@@ -724,7 +723,7 @@ public class Main_Controller {
             stage.setResizable(false);
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initStyle(StageStyle.UTILITY);
-            stage.setTitle("Convert image type for " + current_image.getTitle());
+            stage.setTitle("Convertir le type d'image pour " + current_image.getTitle());
             stage.setScene(new Scene(root));
 
             stage.showAndWait();
@@ -769,7 +768,7 @@ public class Main_Controller {
             stage.setResizable(false);
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initStyle(StageStyle.UTILITY);
-            stage.setTitle("Adjust threshold preview for " + current_image.getTitle());
+            stage.setTitle("Aperçu du seuillage ajusté pour " + current_image.getTitle());
             stage.setScene(new Scene(root));
 
             stage.showAndWait();
@@ -810,7 +809,7 @@ public class Main_Controller {
             stage.setResizable(false);
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initStyle(StageStyle.UTILITY);
-            stage.setTitle("Auto threshold preview for " + current_image.getTitle());
+            stage.setTitle("Aperçu du seuillage automatique pour " + current_image.getTitle());
             stage.setScene(new Scene(root));
 
             stage.showAndWait();
@@ -841,8 +840,8 @@ public class Main_Controller {
 
     private void image_threshold_alert() {
 
-        Alert alert = new Alert(AlertType.WARNING, "An 8-bit image is required!", ButtonType.OK);
-        alert.setTitle("Threshold Warning!");
+        Alert alert = new Alert(AlertType.WARNING, "Une image 8-bit est requise !", ButtonType.OK);
+        alert.setTitle("Avertissement de seuillage !");
         alert.showAndWait();
     }
 
@@ -887,7 +886,7 @@ public class Main_Controller {
             stage.setResizable(false);
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initStyle(StageStyle.UTILITY);
-            stage.setTitle("Filter preview for " + current_image.getTitle());
+            stage.setTitle("Aperçu du filtre pour " + current_image.getTitle());
             stage.setScene(new Scene(root));
 
             stage.showAndWait();
@@ -919,7 +918,7 @@ public class Main_Controller {
             stage.setResizable(false);
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initStyle(StageStyle.UTILITY);
-            stage.setTitle("Gaussian Blur Filter preview for " + current_image.getTitle());
+            stage.setTitle("Aperçu du flou gaussien pour " + current_image.getTitle());
             stage.setScene(new Scene(root));
 
             stage.showAndWait();
@@ -951,7 +950,7 @@ public class Main_Controller {
             stage.setResizable(false);
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initStyle(StageStyle.UTILITY);
-            stage.setTitle("Unsharp Mask Filter preview for " + current_image.getTitle());
+            stage.setTitle("Aperçu du masque flou pour " + current_image.getTitle());
             stage.setScene(new Scene(root));
 
             stage.showAndWait();
@@ -983,7 +982,7 @@ public class Main_Controller {
             stage.setResizable(false);
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initStyle(StageStyle.UTILITY);
-            stage.setTitle("Shadow preview for " + current_image.getTitle());
+            stage.setTitle("Aperçu de l'ombrage pour " + current_image.getTitle());
             stage.setScene(new Scene(root));
 
             stage.showAndWait();
@@ -1037,7 +1036,7 @@ public class Main_Controller {
             stage.setResizable(false);
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initStyle(StageStyle.UTILITY);
-            stage.setTitle("Add noise preview for " + current_image.getTitle());
+            stage.setTitle("Aperçu de l'ajout de bruit pour " + current_image.getTitle());
             stage.setScene(new Scene(root));
 
             stage.showAndWait();
@@ -1216,7 +1215,7 @@ public class Main_Controller {
             stage.setResizable(false);
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.initStyle(StageStyle.UTILITY);
-            stage.setTitle("Pairwise Stitching");
+            stage.setTitle("Assemblage par paire");
             stage.setScene(new Scene(root));
 
             stage.showAndWait();
@@ -1248,10 +1247,10 @@ public class Main_Controller {
 
         if (WindowManager.getWindow("") != null) {
 
-            WindowManager.getImage("").setTitle("Stitching Result");
+            WindowManager.getImage("").setTitle("Résultat d'assemblage");
 
             stitching_result = new ImagePlus();
-            stitching_result = WindowManager.getImage("Stitching Result").duplicate();
+            stitching_result = WindowManager.getImage("Résultat d'assemblage").duplicate();
 
             WindowManager.closeAllWindows();
 
@@ -1259,10 +1258,10 @@ public class Main_Controller {
 
             file_grid_stitching_done_success();
 
-            Alert alert = new Alert(AlertType.CONFIRMATION, "Do you want to save stitched image?",
+            Alert alert = new Alert(AlertType.CONFIRMATION, "Voulez-vous enregistrer l'image assemblée ?",
                     ButtonType.NO, ButtonType.YES);
 
-            alert.setTitle("Alert!");
+            alert.setTitle("Alerte !");
 
             alert.showAndWait().ifPresent(type -> {
 
@@ -1280,23 +1279,23 @@ public class Main_Controller {
     }
 
     private void file_openSuccessfullMessage(String imageTitle) {
-        textMessage.setText(imageTitle + " " + "was successfully opened!");
+        textMessage.setText(imageTitle + " a été ouverte avec succès !");
     }
 
     private void file_closeSuccessfullMessage(String imageTitle) {
-        textMessage.setText(imageTitle + " " + "was successfully closed!");
+        textMessage.setText(imageTitle + " a été fermée avec succès !");
     }
 
     private void file_grid_stitching_running() {
-        textMessage.setText("Alert Grid Stitching Plugin is currently running!");
+        textMessage.setText("Le plugin d'assemblage en grille est en cours d'exécution !");
     }
 
     private void file_grid_stitching_cancelled() {
-        textMessage.setText("Grid Stitching Operation was cancelled");
+        textMessage.setText("L'opération d'assemblage en grille a été annulée");
     }
 
     private void file_grid_stitching_done_success() {
-        textMessage.setText("Grid Stitching Operation done!");
+        textMessage.setText("L'opération d'assemblage en grille est terminée !");
     }
 
     @FXML

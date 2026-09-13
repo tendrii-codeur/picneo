@@ -19,7 +19,7 @@
     <jar href="lib\imglib.jar" size="281958" download="eager" />
     <jar href="lib\loci_tools.jar" size="9861744" download="eager" />
     <jar href="lib\mpicbg.jar" size="258355" download="eager" />
-    <jar href="picneo.jar" size="547692" download="eager" />
+    <jar href="picneo.jar" size="548363" download="eager" />
   </resources>
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="picneo" >
     <param name="requiredFXVersion" value="8.0+"/>

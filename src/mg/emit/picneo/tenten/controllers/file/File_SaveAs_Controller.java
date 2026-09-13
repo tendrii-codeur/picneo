@@ -169,8 +169,8 @@ public class File_SaveAs_Controller {
 	}
 		
 	public void file_saveSuccessfullMessage(String imageTitle, Button button) {
-		Alert alert = new Alert(AlertType.INFORMATION, imageTitle + " " + "was successfully saved!", ButtonType.OK);
-		alert.setTitle("Save successfull!");
+		Alert alert = new Alert(AlertType.INFORMATION, imageTitle + " a été enregistrée avec succès !", ButtonType.OK);
+		alert.setTitle("Enregistrement réussi !");
 		alert.showAndWait();
 		
 		Stage stage = (Stage) button.getScene().getWindow();
@@ -178,14 +178,14 @@ public class File_SaveAs_Controller {
 	}
 			
 	public void file_saveAsFitsFailedMessage() {
-		Alert alert = new Alert(AlertType.ERROR, "Save was cancelled or The current image is not Greyscale image!", ButtonType.OK);
-		alert.setTitle("Save error!");
+		Alert alert = new Alert(AlertType.ERROR, "L'enregistrement a été annulé ou l'image actuelle n'est pas en niveaux de gris !", ButtonType.OK);
+		alert.setTitle("Erreur d'enregistrement !");
 		alert.showAndWait();
 	}
 		
 	public void file_saveAsLutFailedMessage() {
-		Alert alert = new Alert(AlertType.ERROR, "Save was cancelled or RGB Image is not allowed!", ButtonType.OK);
-		alert.setTitle("Save error!");
+		Alert alert = new Alert(AlertType.ERROR, "L'enregistrement a été annulé ou les images RGB ne sont pas autorisées !", ButtonType.OK);
+		alert.setTitle("Erreur d'enregistrement !");
 		alert.showAndWait();
 	}
 	

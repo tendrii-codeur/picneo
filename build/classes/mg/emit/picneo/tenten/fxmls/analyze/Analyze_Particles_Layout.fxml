@@ -23,10 +23,10 @@
       <TableView fx:id="tableView" prefHeight="678.0" prefWidth="280.0" BorderPane.alignment="CENTER">
         <columns>
           <TableColumn fx:id="tc_id" prefWidth="75.0" text="ID" />
-            <TableColumn fx:id="tc_width" prefWidth="75.0" text="Width" />
-            <TableColumn fx:id="tc_height" prefWidth="75.0" text="Height" />
-          <TableColumn fx:id="tc_area" prefWidth="75.0" text="Area" />
-            <TableColumn fx:id="tc_mean" prefWidth="75.0" text="Mean" />
+            <TableColumn fx:id="tc_width" prefWidth="75.0" text="Largeur" />
+            <TableColumn fx:id="tc_height" prefWidth="75.0" text="Hauteur" />
+          <TableColumn fx:id="tc_area" prefWidth="75.0" text="Aire" />
+            <TableColumn fx:id="tc_mean" prefWidth="75.0" text="Moyenne" />
             <TableColumn fx:id="tc_min" prefWidth="75.0" text="Min" />
             <TableColumn fx:id="tc_max" prefWidth="75.0" text="Max" />
             <TableColumn fx:id="tc_x" prefWidth="75.0" text="X" />
@@ -124,7 +124,7 @@
                         </ImageView>
                      </graphic>
                      <tooltip>
-                        <Tooltip text="Left" />
+                        <Tooltip text="Gauche" />
                      </tooltip>
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -139,7 +139,7 @@
                         </ImageView>
                      </graphic>
                      <tooltip>
-                        <Tooltip text="Right" />
+                        <Tooltip text="Droite" />
                      </tooltip>
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -154,7 +154,7 @@
                         </ImageView>
                      </graphic>
                      <tooltip>
-                        <Tooltip text="Up" />
+                        <Tooltip text="Haut" />
                      </tooltip>
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -169,7 +169,7 @@
                         </ImageView>
                      </graphic>
                      <tooltip>
-                        <Tooltip text="Down" />
+                        <Tooltip text="Bas" />
                      </tooltip>
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -202,7 +202,7 @@
                         </ImageView>
                      </graphic>
                      <tooltip>
-                        <Tooltip text="Show Image" />
+                        <Tooltip text="Afficher l'image" />
                      </tooltip>
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -210,7 +210,7 @@
                   </Button>
                   <Button mnemonicParsing="false" onAction="#reset_image_roi">
                      <tooltip>
-                        <Tooltip text="Reset Image" />
+                        <Tooltip text="Réinitialiser l'image" />
                      </tooltip>
                      <graphic>
                         <ImageView disable="true" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
@@ -245,7 +245,7 @@
                         </ImageView>
                      </graphic>
                      <tooltip>
-                        <Tooltip text="Analyze" />
+                        <Tooltip text="Analyser" />
                      </tooltip>
                   </Button>
                   <Button fx:id="button_show" layoutX="559.0" layoutY="35.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#showImage" prefHeight="50.0" prefWidth="50.0">
@@ -263,7 +263,7 @@
                         </ImageView>
                      </graphic>
                      <tooltip>
-                        <Tooltip text="Show image" />
+                        <Tooltip text="Afficher l'image" />
                      </tooltip>
                   </Button>
                   <Button fx:id="button_close" layoutX="356.0" layoutY="20.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" onAction="#close" prefHeight="50.0" prefWidth="50.0">
@@ -278,7 +278,7 @@
                         </ImageView>
                      </graphic>
                      <tooltip>
-                        <Tooltip text="Exit" />
+                        <Tooltip text="Fermer" />
                      </tooltip>
                      <HBox.margin>
                         <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
@@ -297,7 +297,7 @@
          <children>
             <VBox alignment="CENTER" prefHeight="100.0" prefWidth="120.0">
                <children>
-                  <Label text="Show" textAlignment="CENTER" wrapText="true">
+                  <Label text="Afficher" textAlignment="CENTER" wrapText="true">
                      <font>
                         <Font name="Bell MT Bold" size="22.0" />
                      </font>
@@ -317,7 +317,7 @@
             </VBox>
             <VBox alignment="CENTER" prefHeight="100.0" prefWidth="165.0">
                <children>
-                  <Label text="Pixel Size Min" textAlignment="CENTER" wrapText="true">
+                  <Label text="Taille Min (px)" textAlignment="CENTER" wrapText="true">
                      <font>
                         <Font name="Bell MT Bold" size="22.0" />
                      </font>
@@ -340,7 +340,7 @@
             </VBox>
             <VBox alignment="CENTER" prefHeight="82.0" prefWidth="170.0">
                <children>
-                  <Label text="Pixel Size Max" textAlignment="CENTER" wrapText="true">
+                  <Label text="Taille Max (px)" textAlignment="CENTER" wrapText="true">
                      <font>
                         <Font name="Bell MT Bold" size="22.0" />
                      </font>
@@ -370,7 +370,7 @@
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </HBox.margin>
                            <tooltip>
-                              <Tooltip text="Enable/Disable Infinite Value" />
+                              <Tooltip text="Activer/Désactiver valeur infinie" />
                            </tooltip>
                         </ToggleButton>
                      </children>
@@ -385,7 +385,7 @@
             </VBox>
             <VBox alignment="CENTER" prefHeight="76.0" prefWidth="175.0">
                <children>
-                  <Label alignment="CENTER" prefHeight="31.0" prefWidth="325.0" text="Circularity Min" textAlignment="CENTER" wrapText="true">
+                  <Label alignment="CENTER" prefHeight="31.0" prefWidth="325.0" text="Circularité Min" textAlignment="CENTER" wrapText="true">
                      <font>
                         <Font name="Bell MT Bold" size="22.0" />
                      </font>
@@ -408,7 +408,7 @@
             </VBox>
             <VBox alignment="CENTER" prefHeight="98.0" prefWidth="190.0">
                <children>
-                  <Label alignment="CENTER" prefHeight="31.0" prefWidth="325.0" text="Circularity Max" textAlignment="CENTER" wrapText="true">
+                  <Label alignment="CENTER" prefHeight="31.0" prefWidth="325.0" text="Circularité Max" textAlignment="CENTER" wrapText="true">
                      <font>
                         <Font name="Bell MT Bold" size="22.0" />
                      </font>
@@ -438,7 +438,7 @@
                   </ImageView>
                </graphic>
                <tooltip>
-                  <Tooltip text="Include Holes" />
+                  <Tooltip text="Inclure les trous" />
                </tooltip>
                <HBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -453,7 +453,7 @@
                   </ImageView>
                </graphic>
                <tooltip>
-                  <Tooltip text="Exclude On Edges" />
+                  <Tooltip text="Exclure sur les bords" />
                </tooltip>
                <HBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

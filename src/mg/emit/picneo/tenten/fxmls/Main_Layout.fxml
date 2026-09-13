@@ -26,74 +26,74 @@
    <top>
       <MenuBar BorderPane.alignment="CENTER">
          <menus>
-            <Menu mnemonicParsing="false" text="File">
+            <Menu mnemonicParsing="false" text="Fichier">
                <items>
-                  <MenuItem fx:id="file_menuItem_openImage" mnemonicParsing="false" onAction="#file_openImage" text="Open image..." />
+                  <MenuItem fx:id="file_menuItem_openImage" mnemonicParsing="false" onAction="#file_openImage" text="Ouvrir une image..." />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem fx:id="file_menuItem_closeImage" disable="true" mnemonicParsing="false" onAction="#file_closeImage" text="Close" />
-                  <MenuItem fx:id="file_menuItem_closeAllImage" disable="true" mnemonicParsing="false" onAction="#file_closeAllImage" text="Close All" />
+                  <MenuItem fx:id="file_menuItem_closeImage" disable="true" mnemonicParsing="false" onAction="#file_closeImage" text="Fermer" />
+                  <MenuItem fx:id="file_menuItem_closeAllImage" disable="true" mnemonicParsing="false" onAction="#file_closeAllImage" text="Tout fermer" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem fx:id="file_menuItem_saveImage" disable="true" mnemonicParsing="false" onAction="#file_save" text="Save" />
-                  <MenuItem fx:id="file_menuItem_saveAllImage" disable="true" mnemonicParsing="false" onAction="#file_saveAll" text="Save All" />
-                  <MenuItem fx:id="file_menuItem_saveAsImage" disable="true" mnemonicParsing="false" onAction="#file_saveAs" text="Save As" />
+                  <MenuItem fx:id="file_menuItem_saveImage" disable="true" mnemonicParsing="false" onAction="#file_save" text="Enregistrer" />
+                  <MenuItem fx:id="file_menuItem_saveAllImage" disable="true" mnemonicParsing="false" onAction="#file_saveAll" text="Tout enregistrer" />
+                  <MenuItem fx:id="file_menuItem_saveAsImage" disable="true" mnemonicParsing="false" onAction="#file_saveAs" text="Enregistrer sous..." />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" onAction="#file_quit" text="Quit" />
+                  <MenuItem mnemonicParsing="false" onAction="#file_quit" text="Quitter" />
                </items>
             </Menu>
             <Menu fx:id="image_menu" mnemonicParsing="false" text="Image">
                <items>
-                  <MenuItem fx:id="image_menuItem_convert_type" disable="true" mnemonicParsing="false" onAction="#image_ConvertType" text="Convert Type..." />
+                  <MenuItem fx:id="image_menuItem_convert_type" disable="true" mnemonicParsing="false" onAction="#image_ConvertType" text="Convertir le type..." />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem fx:id="image_menuItem_brightness_contrast" disable="true" mnemonicParsing="false" onAction="#image_adjustBrightnessContrast" text="Adjust Brightness/Contrast..." />
+                  <MenuItem fx:id="image_menuItem_brightness_contrast" disable="true" mnemonicParsing="false" onAction="#image_adjustBrightnessContrast" text="Ajuster Luminosité/Contraste..." />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <Menu fx:id="image_menu_threshold" disable="true" mnemonicParsing="false" text="Thresholding">
+                  <Menu fx:id="image_menu_threshold" disable="true" mnemonicParsing="false" text="Seuillage">
                      <items>
-                        <MenuItem mnemonicParsing="false" onAction="#image_threshold_adjust" text="Adjust..." />
+                        <MenuItem mnemonicParsing="false" onAction="#image_threshold_adjust" text="Ajuster..." />
                         <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem mnemonicParsing="false" onAction="#image_threshold_auto" text="Auto..." />
-                        <MenuItem mnemonicParsing="false" onAction="#image_threshold_auto_instant" text="Instant Auto" />
+                        <MenuItem mnemonicParsing="false" onAction="#image_threshold_auto" text="Automatique..." />
+                        <MenuItem mnemonicParsing="false" onAction="#image_threshold_auto_instant" text="Auto instantané" />
                      </items>
                   </Menu>
                </items>
             </Menu>
-            <Menu fx:id="process_menu" mnemonicParsing="false" text="Process">
+            <Menu fx:id="process_menu" mnemonicParsing="false" text="Traitement">
                <items>
-                  <Menu fx:id="process_menu_filters" disable="true" mnemonicParsing="false" text="Filtering">
+                  <Menu fx:id="process_menu_filters" disable="true" mnemonicParsing="false" text="Filtrage">
                      <items>
-                        <MenuItem mnemonicParsing="false" onAction="#process_filter" text="Filters..." />
-                        <MenuItem mnemonicParsing="false" onAction="#process_filter_gaussian_blur" text="Gaussian Blur" />
-                        <MenuItem mnemonicParsing="false" onAction="#process_filter_unsharp_mask" text="Unsharp Mask" />
+                        <MenuItem mnemonicParsing="false" onAction="#process_filter" text="Filtres..." />
+                        <MenuItem mnemonicParsing="false" onAction="#process_filter_gaussian_blur" text="Flou gaussien" />
+                        <MenuItem mnemonicParsing="false" onAction="#process_filter_unsharp_mask" text="Masque flou" />
                      </items>
                   </Menu>
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <Menu fx:id="process_menu_noise" disable="true" mnemonicParsing="false" text="Noise">
+                  <Menu fx:id="process_menu_noise" disable="true" mnemonicParsing="false" text="Bruit">
                     <items>
-                      <MenuItem mnemonicParsing="false" onAction="#process_noise_add" text="Add" />
-                        <MenuItem mnemonicParsing="false" onAction="#process_noise_despekle" text="Despeckle" />
+                      <MenuItem mnemonicParsing="false" onAction="#process_noise_add" text="Ajouter" />
+                        <MenuItem mnemonicParsing="false" onAction="#process_noise_despekle" text="Anti-parasite" />
                     </items>
                   </Menu>
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem fx:id="process_menuItem_shadow" disable="true" mnemonicParsing="false" onAction="#process_shadow" text="Shadow" />
+                  <MenuItem fx:id="process_menuItem_shadow" disable="true" mnemonicParsing="false" onAction="#process_shadow" text="Ombrage" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <Menu fx:id="process_menu_others" disable="true" mnemonicParsing="false" text="Others">
+                  <Menu fx:id="process_menu_others" disable="true" mnemonicParsing="false" text="Autres">
                      <items>
-                        <MenuItem mnemonicParsing="false" onAction="#process_find_edges" text="Find Edges" />
-                        <MenuItem mnemonicParsing="false" onAction="#process_invert" text="Invert" />
-                        <MenuItem mnemonicParsing="false" onAction="#process_sharpen" text="Sharpen" />
-                        <MenuItem mnemonicParsing="false" onAction="#process_smooth" text="Smooth" />
+                        <MenuItem mnemonicParsing="false" onAction="#process_find_edges" text="Détecter les contours" />
+                        <MenuItem mnemonicParsing="false" onAction="#process_invert" text="Inverser" />
+                        <MenuItem mnemonicParsing="false" onAction="#process_sharpen" text="Netteté" />
+                        <MenuItem mnemonicParsing="false" onAction="#process_smooth" text="Lisser" />
                      </items>
                   </Menu>
                </items>
             </Menu>
-            <Menu mnemonicParsing="false" text="Analyze">
+            <Menu mnemonicParsing="false" text="Analyse">
               <items>
-                <MenuItem fx:id="analyze_particles" disable="true" mnemonicParsing="false" onAction="#analyze_particles" text="Analyze Particles" />
+                <MenuItem fx:id="analyze_particles" disable="true" mnemonicParsing="false" onAction="#analyze_particles" text="Analyser les particules" />
               </items>
             </Menu>
-            <Menu mnemonicParsing="false" text="Stiching">
+            <Menu mnemonicParsing="false" text="Assemblage">
               <items>
-                <MenuItem fx:id="stitching_menuItem_pairwise" disable="true" mnemonicParsing="false" onAction="#plugin_stiching_pairwise" text="Pairwise Stiching" />
-                  <MenuItem mnemonicParsing="false" onAction="#plugin_stitching_grid" text="Grid Stitching" />
+                <MenuItem fx:id="stitching_menuItem_pairwise" disable="true" mnemonicParsing="false" onAction="#plugin_stiching_pairwise" text="Assemblage par paire" />
+                  <MenuItem mnemonicParsing="false" onAction="#plugin_stitching_grid" text="Assemblage en grille" />
               </items>
             </Menu>
          </menus>
@@ -123,7 +123,7 @@
                         </ImageView>
                      </graphic>
                      <tooltip>
-                        <Tooltip text="Open image" />
+                        <Tooltip text="Ouvrir une image" />
                      </tooltip>
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -138,7 +138,7 @@
                         </ImageView>
                      </graphic>
                      <tooltip>
-                        <Tooltip text="Save all" />
+                        <Tooltip text="Tout enregistrer" />
                      </tooltip>
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -153,7 +153,7 @@
                         </ImageView>
                      </graphic>
                      <tooltip>
-                        <Tooltip text="Close all" />
+                        <Tooltip text="Tout fermer" />
                      </tooltip>
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -264,7 +264,7 @@
                   <Insets bottom="15.0" left="15.0" right="15.0" />
                </VBox.margin>
             </Separator>
-            <Label text="IMAGE INFO">
+            <Label text="INFORMATIONS IMAGE">
                <font>
                   <Font name="Impact" size="24.0" />
                </font>
@@ -294,7 +294,7 @@
    <center>
       <VBox fx:id="vbox_current_image_1" alignment="TOP_CENTER" disable="true" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <Label text="CURRENT IMAGE">
+            <Label text="IMAGE ACTUELLE">
                <VBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </VBox.margin>
@@ -312,7 +312,7 @@
                         </ImageView>
                      </graphic>
                      <tooltip>
-                        <Tooltip text="Show Image" />
+                        <Tooltip text="Afficher l'image" />
                      </tooltip>
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -327,7 +327,7 @@
                         </ImageView>
                      </graphic>
                      <tooltip>
-                        <Tooltip text="Brightness and Contrast" />
+                        <Tooltip text="Luminosité et Contraste" />
                      </tooltip>
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -342,7 +342,7 @@
                         </ImageView>
                      </graphic>
                      <tooltip>
-                        <Tooltip text="Convert Type" />
+                        <Tooltip text="Convertir le type" />
                      </tooltip>
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -357,7 +357,7 @@
                         </ImageView>
                      </graphic>
                      <tooltip>
-                        <Tooltip text="Threshold" />
+                        <Tooltip text="Seuillage" />
                      </tooltip>
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -372,7 +372,7 @@
                         </ImageView>
                      </graphic>
                      <tooltip>
-                        <Tooltip text="Filters" />
+                        <Tooltip text="Filtres" />
                      </tooltip>
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -387,7 +387,7 @@
                         </ImageView>
                      </graphic>
                      <tooltip>
-                        <Tooltip text="Analyze Particles" />
+                        <Tooltip text="Analyser les particules" />
                      </tooltip>
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -402,7 +402,7 @@
                         </ImageView>
                      </graphic>
                      <tooltip>
-                        <Tooltip text="Save Image" />
+                        <Tooltip text="Enregistrer l'image" />
                      </tooltip>
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -417,7 +417,7 @@
                         </ImageView>
                      </graphic>
                      <tooltip>
-                        <Tooltip text="Close Image" />
+                        <Tooltip text="Fermer l'image" />
                      </tooltip>
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -432,7 +432,7 @@
                         </ImageView>
                      </graphic>
                      <tooltip>
-                        <Tooltip text="Show RGB Stats" />
+                        <Tooltip text="Statistiques RGB" />
                      </tooltip>
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -513,7 +513,7 @@
                         </ImageView>
                      </graphic>
                      <tooltip>
-                        <Tooltip text="Left" />
+                        <Tooltip text="Gauche" />
                      </tooltip>
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -528,7 +528,7 @@
                         </ImageView>
                      </graphic>
                      <tooltip>
-                        <Tooltip text="Right" />
+                        <Tooltip text="Droite" />
                      </tooltip>
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -543,7 +543,7 @@
                         </ImageView>
                      </graphic>
                      <tooltip>
-                        <Tooltip text="Up" />
+                        <Tooltip text="Haut" />
                      </tooltip>
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -558,7 +558,7 @@
                         </ImageView>
                      </graphic>
                      <tooltip>
-                        <Tooltip text="Down" />
+                        <Tooltip text="Bas" />
                      </tooltip>
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -591,7 +591,7 @@
                         </ImageView>
                      </graphic>
                      <tooltip>
-                        <Tooltip text="Show Image" />
+                        <Tooltip text="Afficher l'image" />
                      </tooltip>
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -606,7 +606,7 @@
                         </ImageView>
                      </graphic>
                      <tooltip>
-                        <Tooltip text="Show RGB Stats" />
+                        <Tooltip text="Statistiques RGB" />
                      </tooltip>
                   </Button>
                   <Button mnemonicParsing="false" onAction="#reset_image_roi">
@@ -618,7 +618,7 @@
                         </ImageView>
                      </graphic>
                      <tooltip>
-                        <Tooltip text="Reset Image" />
+                        <Tooltip text="Réinitialiser l'image" />
                      </tooltip>
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

@@ -45,7 +45,7 @@
                         </ImageView>
                      </graphic>
                      <tooltip>
-                        <Tooltip text="North-West" />
+                        <Tooltip text="Nord-Ouest" />
                      </tooltip>
                   </Button>
                   <Button fx:id="button_north" minHeight="55.0" minWidth="65.0" mnemonicParsing="false" onAction="#button_north_onClick" prefHeight="55.0" prefWidth="65.0">
@@ -63,7 +63,7 @@
                         </ImageView>
                      </graphic>
                      <tooltip>
-                        <Tooltip text="North" />
+                        <Tooltip text="Nord" />
                      </tooltip>
                   </Button>
                   <Button fx:id="button_north_east" minHeight="55.0" minWidth="65.0" mnemonicParsing="false" onAction="#button_north_east_onClick" prefHeight="55.0" prefWidth="65.0">
@@ -84,7 +84,7 @@
                         </ImageView>
                      </graphic>
                      <tooltip>
-                        <Tooltip text="North-East" />
+                        <Tooltip text="Nord-Est" />
                      </tooltip>
                   </Button>
                </children>
@@ -112,7 +112,7 @@
                         </ImageView>
                      </graphic>
                      <tooltip>
-                        <Tooltip text="West" />
+                        <Tooltip text="Ouest" />
                      </tooltip>
                   </Button>
                   <Button fx:id="button_adjust" minHeight="55.0" minWidth="65.0" mnemonicParsing="false" onAction="#button_adjust_action_event" prefHeight="55.0" prefWidth="65.0">
@@ -130,7 +130,7 @@
                         </ImageView>
                      </graphic>
                      <tooltip>
-                        <Tooltip text="Apply" />
+                        <Tooltip text="Appliquer" />
                      </tooltip>
                   </Button>
                   <Button fx:id="button_reset" layoutX="185.0" layoutY="26.0" minHeight="55.0" minWidth="65.0" mnemonicParsing="false" onAction="#button_reset_action_event" prefHeight="55.0" prefWidth="65.0">
@@ -145,7 +145,7 @@
                         </ImageView>
                      </graphic>
                      <tooltip>
-                        <Tooltip text="Reset" />
+                        <Tooltip text="Réinitialiser" />
                      </tooltip>
                   </Button>
                   <Button fx:id="button_cancel" minHeight="55.0" minWidth="65.0" mnemonicParsing="false" onAction="#button_cancel_action_event" prefHeight="55.0" prefWidth="65.0">
@@ -163,7 +163,7 @@
                         </ImageView>
                      </graphic>
                      <tooltip>
-                        <Tooltip text="Exit" />
+                        <Tooltip text="Fermer" />
                      </tooltip>
                   </Button>
                   <Button fx:id="button_east" minHeight="55.0" minWidth="65.0" mnemonicParsing="false" onAction="#button_east_onClick" prefHeight="55.0" prefWidth="65.0">
@@ -184,7 +184,7 @@
                         </ImageView>
                      </graphic>
                      <tooltip>
-                        <Tooltip text="East" />
+                        <Tooltip text="Est" />
                      </tooltip>
                   </Button>
                </children>
@@ -209,7 +209,7 @@
                         </ImageView>
                      </graphic>
                      <tooltip>
-                        <Tooltip text="South-West" />
+                        <Tooltip text="Sud-Ouest" />
                      </tooltip>
                   </Button>
                   <Button fx:id="button_south" minHeight="55.0" minWidth="65.0" mnemonicParsing="false" onAction="#button_south_onClick" prefHeight="55.0" prefWidth="65.0">
@@ -227,7 +227,7 @@
                         </ImageView>
                      </graphic>
                      <tooltip>
-                        <Tooltip text="South" />
+                        <Tooltip text="Sud" />
                      </tooltip>
                   </Button>
                   <Button fx:id="button_south_east" minHeight="55.0" minWidth="65.0" mnemonicParsing="false" onAction="#button_south_east_onClick" prefHeight="55.0" prefWidth="65.0">
@@ -248,7 +248,7 @@
                         </ImageView>
                      </graphic>
                      <tooltip>
-                        <Tooltip text="South-East" />
+                        <Tooltip text="Sud-Est" />
                      </tooltip>
                   </Button>
                </children>

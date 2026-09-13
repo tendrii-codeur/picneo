@@ -133,7 +133,7 @@ public class Image_ConvertType_Controller {
 	public void image_convertFailedMessage(String message) {
 		
 		Alert alert = new Alert(AlertType.ERROR, message, ButtonType.OK);
-		alert.setTitle("Image convert type error!");
+		alert.setTitle("Erreur de conversion de type d'image !");
 		alert.showAndWait();
 	}
 	

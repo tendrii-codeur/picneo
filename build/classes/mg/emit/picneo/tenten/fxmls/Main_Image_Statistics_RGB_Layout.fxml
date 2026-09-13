@@ -17,7 +17,7 @@
          <children>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label alignment="CENTER" text="RED" textFill="RED">
+                  <Label alignment="CENTER" text="ROUGE" textFill="RED">
                      <font>
                         <Font name="Arial" size="30.0" />
                      </font>
@@ -25,7 +25,7 @@
                         <Insets bottom="10.0" left="10.0" right="100.0" top="10.0" />
                      </HBox.margin>
                   </Label>
-                  <Label alignment="CENTER" text="GREEN" textFill="LIME">
+                  <Label alignment="CENTER" text="VERT" textFill="LIME">
                      <font>
                         <Font name="Arial" size="30.0" />
                      </font>
@@ -33,7 +33,7 @@
                         <Insets bottom="10.0" left="110.0" right="110.0" top="10.0" />
                      </HBox.margin>
                   </Label>
-                  <Label alignment="CENTER_RIGHT" text="BLUE" textFill="#00c5ff">
+                  <Label alignment="CENTER_RIGHT" text="BLEU" textFill="#00c5ff">
                      <font>
                         <Font name="Arial" size="30.0" />
                      </font>
@@ -117,7 +117,7 @@
                   </ImageView>
                </graphic>
                <tooltip>
-                  <Tooltip text="Show Images" />
+                  <Tooltip text="Afficher les images" />
                </tooltip>
                <HBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -132,7 +132,7 @@
                   </ImageView>
                </graphic>
                <tooltip>
-                  <Tooltip text="Exit" />
+                  <Tooltip text="Fermer" />
                </tooltip>
                <HBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

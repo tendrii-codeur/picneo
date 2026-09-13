@@ -27,7 +27,7 @@
          <children>
             <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="GRAY">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="GRIS">
                      <font>
                         <Font name="Berlin Sans FB" size="22.0" />
                      </font>
@@ -110,7 +110,7 @@
                         </ImageView>
                      </graphic>
                      <tooltip>
-                        <Tooltip text="Convert" />
+                        <Tooltip text="Convertir" />
                      </tooltip>
                   </Button>
                   <Button fx:id="button_cancel" mnemonicParsing="false" onAction="#button_cancel_action_event" prefHeight="25.0" prefWidth="25.0">
@@ -128,7 +128,7 @@
                         </ImageView>
                      </graphic>
                      <tooltip>
-                        <Tooltip text="Exit" />
+                        <Tooltip text="Fermer" />
                      </tooltip>
                   </Button>
                </children>
@@ -140,7 +140,7 @@
       </VBox>
    </bottom>
    <top>
-      <Text fx:id="textView_status" strokeType="OUTSIDE" strokeWidth="0.0" text="STATUS" BorderPane.alignment="CENTER">
+      <Text fx:id="textView_status" strokeType="OUTSIDE" strokeWidth="0.0" text="STATUT" BorderPane.alignment="CENTER">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
