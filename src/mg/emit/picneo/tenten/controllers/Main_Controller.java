@@ -1,5 +1,6 @@
 package mg.emit.picneo.tenten.controllers;
 
+import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
@@ -466,11 +467,9 @@ public class Main_Controller {
 
     private void file_closeImage_save(Integer id) {
 
-        String path = ip_array.get(id).getOriginalFileInfo().directory + ip_array.get(id).getTitle();
+        String savedName = saveImageAsNumberedCopy(ip_array.get(id));
 
-        IJ.save(ip_array.get(id), path);
-
-        Alert alert = new Alert(AlertType.INFORMATION, "L'image " + ip_array.get(id).getTitle() + " a été enregistrée !",
+        Alert alert = new Alert(AlertType.INFORMATION, "L'image a été enregistrée sous " + savedName + " !",
                 ButtonType.OK);
 
         alert.setTitle("Alerte !");
@@ -537,12 +536,10 @@ public class Main_Controller {
             Tooltip.uninstall(iv_array.get(i), new Tooltip(ip_array.get(i).getTitle()));
             iv_array.get(i).setImage(default_image);
 
-            String path = ip_array.get(i).getOriginalFileInfo().directory + ip_array.get(i).getTitle();
-
-            IJ.save(ip_array.get(i), path);
+            saveImageAsNumberedCopy(ip_array.get(i));
         }
 
-        Alert alert_save = new Alert(AlertType.INFORMATION, "Toutes les images ont été enregistrées !",
+        Alert alert_save = new Alert(AlertType.INFORMATION, "Toutes les images ont été enregistrées en copies numérotées !",
                 ButtonType.OK);
 
         alert_save.setTitle("Alerte !");
@@ -606,13 +603,11 @@ public class Main_Controller {
 
         Integer id = Integer.valueOf(iv_current_image.getAccessibleText());
 
-        String path = ip_array.get(id).getOriginalFileInfo().directory + ip_array.get(id).getTitle();
-
-        IJ.save(ip_array.get(id), path);
+        String savedName = saveImageAsNumberedCopy(ip_array.get(id));
 
         setCurrentImage(id);
 
-        Alert alert = new Alert(AlertType.INFORMATION, "L'image " + ip_array.get(id).getTitle() + " a été enregistrée !",
+        Alert alert = new Alert(AlertType.INFORMATION, "L'image a été enregistrée sous " + savedName + " !",
                 ButtonType.OK);
 
         alert.setTitle("Alerte !");
@@ -625,19 +620,67 @@ public class Main_Controller {
         Integer id = Integer.valueOf(iv_current_image.getAccessibleText());
 
         for (int i = 0; i < ip_array.size(); i++) {
-
-            String path = ip_array.get(i).getOriginalFileInfo().directory + ip_array.get(i).getTitle();
-
-            IJ.save(ip_array.get(i), path);
+            saveImageAsNumberedCopy(ip_array.get(i));
         }
 
         setCurrentImage(id);
 
-        Alert alert = new Alert(AlertType.INFORMATION, "Toutes les images ont été enregistrées !",
+        Alert alert = new Alert(AlertType.INFORMATION, "Toutes les images ont été enregistrées en copies numérotées !",
                 ButtonType.OK);
 
         alert.setTitle("Alerte !");
         alert.showAndWait();
+    }
+
+    private String saveImageAsNumberedCopy(ImagePlus image) {
+        File copy = getUniqueNumberedCopyFile(image);
+        IJ.save(image, copy.getAbsolutePath());
+        return copy.getName();
+    }
+
+    private File getUniqueNumberedCopyFile(ImagePlus image) {
+        File source = getOriginalSourceFile(image);
+        String directory;
+        String fileName;
+
+        if (source != null) {
+            directory = source.getParent();
+            fileName = source.getName();
+        } else {
+            directory = System.getProperty("user.home");
+            fileName = image.getTitle() != null && !image.getTitle().isEmpty() ? image.getTitle() : "image";
+        }
+
+        if (directory == null) {
+            directory = System.getProperty("user.home");
+        }
+
+        String baseName = fileName;
+        String extension = "";
+        int lastDot = fileName.lastIndexOf('.');
+        if (lastDot > 0) {
+            baseName = fileName.substring(0, lastDot);
+            extension = fileName.substring(lastDot);
+        }
+
+        File originalAbsolute = source != null ? source.getAbsoluteFile() : null;
+        int n = 1;
+        File candidate;
+        do {
+            candidate = new File(directory, baseName + "(" + n + ")" + extension);
+            n++;
+        } while (candidate.exists() || (originalAbsolute != null && candidate.getAbsoluteFile().equals(originalAbsolute)));
+
+        return candidate;
+    }
+
+    private File getOriginalSourceFile(ImagePlus image) {
+        if (image.getOriginalFileInfo() == null
+                || image.getOriginalFileInfo().directory == null
+                || image.getTitle() == null) {
+            return null;
+        }
+        return new File(image.getOriginalFileInfo().directory, image.getTitle());
     }
 
     @FXML
