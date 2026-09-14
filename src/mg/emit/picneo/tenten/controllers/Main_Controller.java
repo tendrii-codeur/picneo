@@ -539,7 +539,7 @@ public class Main_Controller {
             saveImageAsNumberedCopy(ip_array.get(i));
         }
 
-        Alert alert_save = new Alert(AlertType.INFORMATION, "Toutes les images ont été enregistrées en copies numérotées !",
+        Alert alert_save = new Alert(AlertType.INFORMATION, "Toutes les images ont été enregistrées !",
                 ButtonType.OK);
 
         alert_save.setTitle("Alerte !");

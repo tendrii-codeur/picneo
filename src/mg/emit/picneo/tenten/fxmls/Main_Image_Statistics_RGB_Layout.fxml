@@ -48,7 +48,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <ImageView fx:id="iv_image_red" accessibleText="0" fitHeight="240.0" fitWidth="275.0" onMouseClicked="#show_image_red" pickOnBounds="true">
+                  <ImageView fx:id="iv_image_red" accessibleText="0" fitHeight="240.0" fitWidth="275.0" preserveRatio="true" onMouseClicked="#show_image_red" pickOnBounds="true">
                      <HBox.margin>
                         <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                      </HBox.margin>
@@ -56,7 +56,7 @@
                         <Image url="@../../../../../../empty-image.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="iv_image_green" accessibleText="1" fitHeight="240.0" fitWidth="275.0" onMouseClicked="#show_image_green" pickOnBounds="true">
+                  <ImageView fx:id="iv_image_green" accessibleText="1" fitHeight="240.0" fitWidth="275.0" preserveRatio="true" onMouseClicked="#show_image_green" pickOnBounds="true">
                      <HBox.margin>
                         <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                      </HBox.margin>
@@ -64,7 +64,7 @@
                         <Image url="@../../../../../../empty-image.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="iv_image_blue" accessibleText="2" fitHeight="240.0" fitWidth="275.0" onMouseClicked="#show_image_blue" pickOnBounds="true">
+                  <ImageView fx:id="iv_image_blue" accessibleText="2" fitHeight="240.0" fitWidth="275.0" preserveRatio="true" onMouseClicked="#show_image_blue" pickOnBounds="true">
                      <HBox.margin>
                         <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                      </HBox.margin>

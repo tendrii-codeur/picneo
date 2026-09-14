@@ -42,7 +42,7 @@
    <center>
       <VBox alignment="CENTER" prefHeight="653.0" prefWidth="661.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fx:id="imageView_preview" fitHeight="460.0" fitWidth="640.0" pickOnBounds="true">
+            <ImageView fx:id="imageView_preview" fitHeight="460.0" fitWidth="640.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../../../../../empty-image.png" />
                </image>

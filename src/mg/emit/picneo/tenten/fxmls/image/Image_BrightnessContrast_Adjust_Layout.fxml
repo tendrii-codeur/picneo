@@ -130,7 +130,7 @@
                   <Font name="Arial Unicode MS" size="20.0" />
                </font>
             </Label>
-            <ImageView fx:id="imageView_preview" fitHeight="270.0" fitWidth="450.0" pickOnBounds="true">
+            <ImageView fx:id="imageView_preview" fitHeight="270.0" fitWidth="450.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../../../../../empty-image.png" />
                </image>

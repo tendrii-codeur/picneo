@@ -9,6 +9,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -18,86 +19,122 @@
          <children>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <ImageView fx:id="iv_1" accessibleText="0" fitHeight="125.0" fitWidth="160.0" pickOnBounds="true">
+                  <StackPane alignment="CENTER" maxHeight="125.0" maxWidth="160.0" minHeight="125.0" minWidth="160.0" prefHeight="125.0" prefWidth="160.0">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="10.0" top="5.0" />
                      </HBox.margin>
-                     <image>
-                        <Image url="@../../../../../../../empty-image.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="iv_2" accessibleText="1" fitHeight="125.0" fitWidth="160.0" pickOnBounds="true">
+                     <children>
+                        <ImageView fx:id="iv_1" accessibleText="0" fitHeight="125.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../../../../empty-image.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </StackPane>
+                  <StackPane alignment="CENTER" maxHeight="125.0" maxWidth="160.0" minHeight="125.0" minWidth="160.0" prefHeight="125.0" prefWidth="160.0">
                      <HBox.margin>
                         <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                      </HBox.margin>
-                     <image>
-                        <Image url="@../../../../../../../empty-image.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="iv_3" accessibleText="2" fitHeight="125.0" fitWidth="160.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true">
-                     <image>
-                        <Image url="@../../../../../../../empty-image.png" />
-                     </image>
+                     <children>
+                        <ImageView fx:id="iv_2" accessibleText="1" fitHeight="125.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../../../../empty-image.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </StackPane>
+                  <StackPane alignment="CENTER" maxHeight="125.0" maxWidth="160.0" minHeight="125.0" minWidth="160.0" prefHeight="125.0" prefWidth="160.0">
                      <HBox.margin>
                         <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
                      </HBox.margin>
-                  </ImageView>
+                     <children>
+                        <ImageView fx:id="iv_3" accessibleText="2" fitHeight="125.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../../../../empty-image.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </StackPane>
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <ImageView fx:id="iv_4" accessibleText="3" fitHeight="125.0" fitWidth="160.0" pickOnBounds="true">
-                     <image>
-                        <Image url="@../../../../../../../empty-image.png" />
-                     </image>
+                  <StackPane alignment="CENTER" maxHeight="125.0" maxWidth="160.0" minHeight="125.0" minWidth="160.0" prefHeight="125.0" prefWidth="160.0">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="10.0" top="5.0" />
                      </HBox.margin>
-                  </ImageView>
-                  <ImageView fx:id="iv_5" accessibleText="4" fitHeight="125.0" fitWidth="160.0" pickOnBounds="true">
-                     <image>
-                        <Image url="@../../../../../../../empty-image.png" />
-                     </image>
+                     <children>
+                        <ImageView fx:id="iv_4" accessibleText="3" fitHeight="125.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../../../../empty-image.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </StackPane>
+                  <StackPane alignment="CENTER" maxHeight="125.0" maxWidth="160.0" minHeight="125.0" minWidth="160.0" prefHeight="125.0" prefWidth="160.0">
                      <HBox.margin>
                         <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                      </HBox.margin>
-                  </ImageView>
-                  <ImageView fx:id="iv_6" accessibleText="5" fitHeight="125.0" fitWidth="160.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true">
-                     <image>
-                        <Image url="@../../../../../../../empty-image.png" />
-                     </image>
+                     <children>
+                        <ImageView fx:id="iv_5" accessibleText="4" fitHeight="125.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../../../../empty-image.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </StackPane>
+                  <StackPane alignment="CENTER" maxHeight="125.0" maxWidth="160.0" minHeight="125.0" minWidth="160.0" prefHeight="125.0" prefWidth="160.0">
                      <HBox.margin>
                         <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
                      </HBox.margin>
-                  </ImageView>
+                     <children>
+                        <ImageView fx:id="iv_6" accessibleText="5" fitHeight="125.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../../../../empty-image.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </StackPane>
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <ImageView fx:id="iv_7" accessibleText="6" fitHeight="125.0" fitWidth="160.0" pickOnBounds="true">
-                     <image>
-                        <Image url="@../../../../../../../empty-image.png" />
-                     </image>
+                  <StackPane alignment="CENTER" maxHeight="125.0" maxWidth="160.0" minHeight="125.0" minWidth="160.0" prefHeight="125.0" prefWidth="160.0">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="10.0" top="5.0" />
                      </HBox.margin>
-                  </ImageView>
-                  <ImageView fx:id="iv_8" accessibleText="7" fitHeight="125.0" fitWidth="160.0" pickOnBounds="true">
-                     <image>
-                        <Image url="@../../../../../../../empty-image.png" />
-                     </image>
+                     <children>
+                        <ImageView fx:id="iv_7" accessibleText="6" fitHeight="125.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../../../../empty-image.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </StackPane>
+                  <StackPane alignment="CENTER" maxHeight="125.0" maxWidth="160.0" minHeight="125.0" minWidth="160.0" prefHeight="125.0" prefWidth="160.0">
                      <HBox.margin>
                         <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
                      </HBox.margin>
-                  </ImageView>
-                  <ImageView fx:id="iv_9" accessibleText="8" fitHeight="125.0" fitWidth="160.0" layoutX="224.0" layoutY="15.0" pickOnBounds="true">
-                     <image>
-                        <Image url="@../../../../../../../empty-image.png" />
-                     </image>
+                     <children>
+                        <ImageView fx:id="iv_8" accessibleText="7" fitHeight="125.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../../../../empty-image.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </StackPane>
+                  <StackPane alignment="CENTER" maxHeight="125.0" maxWidth="160.0" minHeight="125.0" minWidth="160.0" prefHeight="125.0" prefWidth="160.0">
                      <HBox.margin>
                         <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
                      </HBox.margin>
-                  </ImageView>
+                     <children>
+                        <ImageView fx:id="iv_9" accessibleText="8" fitHeight="125.0" fitWidth="160.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../../../../empty-image.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </StackPane>
                </children>
             </HBox>
          </children>
@@ -120,7 +157,7 @@
                   <Font name="Arial" size="15.0" />
                </font>
             </Label>
-            <ImageView fx:id="iv_stitching_left" fitHeight="150.0" fitWidth="190.0" pickOnBounds="true">
+            <ImageView fx:id="iv_stitching_left" fitHeight="150.0" fitWidth="190.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../../../../../empty-image.png" />
                </image>
@@ -133,7 +170,7 @@
                   <Font size="15.0" />
                </font>
             </Label>
-            <ImageView fx:id="iv_stitching_right" fitHeight="150.0" fitWidth="190.0" pickOnBounds="true">
+            <ImageView fx:id="iv_stitching_right" fitHeight="150.0" fitWidth="190.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../../../../../empty-image.png" />
                </image>
