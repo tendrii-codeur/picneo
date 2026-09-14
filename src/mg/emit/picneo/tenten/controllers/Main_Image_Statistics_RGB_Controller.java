@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import mg.emit.picneo.tenten.util.FrenchHistogramWindow;
 
 public class Main_Image_Statistics_RGB_Controller {
 
@@ -64,9 +65,9 @@ public class Main_Image_Statistics_RGB_Controller {
 		iv_image_green.setImage(image_sample_green);
 		iv_image_blue.setImage(image_sample_blue);
 		
-		HistogramWindow histogram_red = new HistogramWindow(image_red);
-		HistogramWindow histogram_green = new HistogramWindow(image_green);
-		HistogramWindow histogram_blue = new HistogramWindow(image_blue);
+		HistogramWindow histogram_red = new FrenchHistogramWindow(image_red);
+		HistogramWindow histogram_green = new FrenchHistogramWindow(image_green);
+		HistogramWindow histogram_blue = new FrenchHistogramWindow(image_blue);
 		
 		image_sample_red = SwingFXUtils.toFXImage(histogram_red.getImagePlus().getBufferedImage(), null);
 		image_sample_green = SwingFXUtils.toFXImage(histogram_green.getImagePlus().getBufferedImage(), null);

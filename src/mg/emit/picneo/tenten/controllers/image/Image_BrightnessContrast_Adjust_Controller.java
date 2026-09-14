@@ -12,6 +12,7 @@ import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import mg.emit.picneo.tenten.util.FrenchHistogramWindow;
 
 public class Image_BrightnessContrast_Adjust_Controller {
 
@@ -111,7 +112,7 @@ public class Image_BrightnessContrast_Adjust_Controller {
 		Image image_preview_fx = SwingFXUtils.toFXImage(image_preview_ip.getBufferedImage(), null);
 		imageView_preview.setImage(image_preview_fx);
 		
-		HistogramWindow histogram = new HistogramWindow(image_preview_ip);
+		HistogramWindow histogram = new FrenchHistogramWindow(image_preview_ip);
 		Image image_histogram_preview_fx = SwingFXUtils.toFXImage(histogram.getImagePlus().getBufferedImage(), null);
 		imageView_histogram_preview.setImage(image_histogram_preview_fx);
 	}

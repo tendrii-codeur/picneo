@@ -17,6 +17,7 @@ import mg.emit.picneo.tenten.controllers.process.Process_Filter_Unsharp_Mask_Con
 import mg.emit.picneo.tenten.controllers.process.Process_Shadow_Controller;
 import mg.emit.picneo.tenten.controllers.stitching.Stitching_Pairwise_Controller;
 import mg.emit.picneo.tenten.enums.Image_Types;
+import mg.emit.picneo.tenten.util.FrenchHistogramWindow;
 import ij.IJ;
 import ij.ImagePlus;
 import ij.WindowManager;
@@ -1439,7 +1440,7 @@ public class Main_Controller {
             ImagePlus current_histogram = new ImagePlus();
             current_histogram.setProcessor(current_image.getImageStack().getProcessor(position));
 
-            HistogramWindow histogram = new HistogramWindow(current_histogram);
+            HistogramWindow histogram = new FrenchHistogramWindow(current_histogram);
             Image image_preview_histogram = SwingFXUtils.toFXImage(histogram.getImagePlus().getBufferedImage(), null);
             iv_current_histogram.setImage(image_preview_histogram);
 
@@ -1473,7 +1474,7 @@ public class Main_Controller {
         ImagePlus current_histogram = new ImagePlus();
         current_histogram.setProcessor(current_image.getImageStack().getProcessor(position));
 
-        HistogramWindow histogram = new HistogramWindow(current_histogram);
+        HistogramWindow histogram = new FrenchHistogramWindow(current_histogram);
         Image image_preview_histogram = SwingFXUtils.toFXImage(histogram.getImagePlus().getBufferedImage(), null);
         iv_current_histogram.setImage(image_preview_histogram);
 
@@ -1500,7 +1501,7 @@ public class Main_Controller {
         ImagePlus current_histogram = new ImagePlus();
         current_histogram.setProcessor(current_image.getImageStack().getProcessor(position));
 
-        HistogramWindow histogram = new HistogramWindow(current_histogram);
+        HistogramWindow histogram = new FrenchHistogramWindow(current_histogram);
         Image image_preview_histogram = SwingFXUtils.toFXImage(histogram.getImagePlus().getBufferedImage(), null);
         iv_current_histogram.setImage(image_preview_histogram);
 
@@ -1513,7 +1514,7 @@ public class Main_Controller {
 
     private void showRoiHistogram(ImagePlus ip) {
 
-        HistogramWindow histogram = new HistogramWindow(ip);
+        HistogramWindow histogram = new FrenchHistogramWindow(ip);
 
         Image image_preview_histogram = SwingFXUtils.toFXImage(histogram.getImagePlus().getBufferedImage(), null);
         iv_current_roi_histogram.setImage(image_preview_histogram);
@@ -1546,10 +1547,46 @@ public class Main_Controller {
                        .replace("Uncalibrated", "Non étalonné")
                        .replace("Inverted LUT", "LUT inversée")
                        .replace("Resolution:", "Résolution :")
+                       .replace("Pixel size:", "Taille du pixel :")
                        .replace("Voxel size:", "Taille du voxel :")
                        .replace("Field of view:", "Champ de vision :");
+            info = filterImageInfoLines(info);
         }
         ta_current_image.setText(info);
+    }
+
+    private String filterImageInfoLines(String info) {
+
+        if (info == null || info.isEmpty()) {
+            return info;
+        }
+
+        String[] linesToRemove = {
+            "No threshold",
+            "Uncalibrated",
+            "Non étalonné",
+            "No overlay",
+            "No selection"
+        };
+
+        StringBuilder filtered = new StringBuilder();
+        for (String line : info.split("\\r?\\n")) {
+            String trimmed = line.trim();
+            boolean remove = false;
+            for (String excluded : linesToRemove) {
+                if (trimmed.equals(excluded)) {
+                    remove = true;
+                    break;
+                }
+            }
+            if (!remove) {
+                if (filtered.length() > 0) {
+                    filtered.append("\n");
+                }
+                filtered.append(line);
+            }
+        }
+        return filtered.toString();
     }
 
     public void setImage(ArrayList<ImagePlus> array) {
