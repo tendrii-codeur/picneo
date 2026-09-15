@@ -12,8 +12,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.control.Spinner;
@@ -33,6 +36,15 @@ public class Analyze_Particles_Controller {
 	
 	@FXML
 	public Button button_close;
+
+	@FXML
+	public Button button_exit;
+
+	@FXML
+	public Label label_title;
+
+	@FXML
+	public HBox title_bar;
 	
 	@FXML
 	public Button button_show;
@@ -124,12 +136,15 @@ public class Analyze_Particles_Controller {
 	
 	private Integer roi_x = 0;
 	private Integer roi_y = 0;
+	private double dragOffsetX;
+	private double dragOffsetY;
 	
 	@FXML
 	public void initialize() {
 	
 		initialize_combo_box();
 	    initialize_table();
+	    bindTitleBar();
 	}
 	
 	private void initialize_combo_box() {
@@ -220,6 +235,37 @@ public class Analyze_Particles_Controller {
 	public void close() {
 		Stage stage = (Stage) button_close.getScene().getWindow();
 		stage.close();
+	}
+
+	@FXML
+	public void button_exit_action_event() {
+		close();
+	}
+
+	public void setWindowTitle(String title) {
+		if (label_title != null) {
+			label_title.setText(title);
+		}
+	}
+
+	private void bindTitleBar() {
+		button_exit.setAlignment(Pos.CENTER);
+		button_exit.setPadding(Insets.EMPTY);
+		button_exit.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+		button_exit.setOnMouseEntered(event -> button_exit.setStyle(
+				"-fx-background-color: #F1707A; -fx-background-radius: 0; -fx-background-insets: 0; -fx-border-width: 0; -fx-cursor: hand; -fx-padding: 0;"));
+		button_exit.setOnMouseExited(event -> button_exit.setStyle(
+				"-fx-background-color: #E81123; -fx-background-radius: 0; -fx-background-insets: 0; -fx-border-width: 0; -fx-cursor: hand; -fx-padding: 0;"));
+
+		title_bar.setOnMousePressed(event -> {
+			dragOffsetX = event.getSceneX();
+			dragOffsetY = event.getSceneY();
+		});
+		title_bar.setOnMouseDragged(event -> {
+			Stage stage = (Stage) button_exit.getScene().getWindow();
+			stage.setX(event.getScreenX() - dragOffsetX);
+			stage.setY(event.getScreenY() - dragOffsetY);
+		});
 	}
 	
 	@FXML

@@ -12,11 +12,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="550.0" minWidth="800.0" onMouseMoved="#imageView_preview_drag_over" prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mg.emit.picneo.tenten.controllers.image.Image_BrightnessContrast_Adjust_Controller">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="586.0" minWidth="800.0" onMouseMoved="#imageView_preview_drag_over" prefHeight="586.0" prefWidth="800.0" style="-fx-background-color: white; -fx-border-color: #9a9a9a; -fx-border-width: 1;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mg.emit.picneo.tenten.controllers.image.Image_BrightnessContrast_Adjust_Controller">
    <bottom>
       <HBox alignment="CENTER" prefHeight="90.0" prefWidth="750.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="button_adjust" minHeight="60.0" minWidth="60.0" mnemonicParsing="false" onAction="#button_adjust_action_event" prefHeight="60.0" prefWidth="60.0">
+            <Button fx:id="button_adjust" disable="true" minHeight="60.0" minWidth="60.0" mnemonicParsing="false" onAction="#button_adjust_action_event" prefHeight="60.0" prefWidth="60.0">
                <HBox.margin>
                   <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                </HBox.margin>
@@ -31,7 +31,7 @@
                   <Tooltip text="Ajuster et Fermer" />
                </tooltip>
             </Button>
-            <Button fx:id="button_reset" minHeight="60.0" minWidth="60.0" mnemonicParsing="false" onAction="#button_reset_action_event" onKeyReleased="#imageView_preview_drag_over" onMouseClicked="#imageView_preview_drag_over" prefHeight="60.0" prefWidth="60.0">
+            <Button fx:id="button_reset" disable="true" minHeight="60.0" minWidth="60.0" mnemonicParsing="false" onAction="#button_reset_action_event" onKeyReleased="#imageView_preview_drag_over" onMouseClicked="#imageView_preview_drag_over" prefHeight="60.0" prefWidth="60.0">
                <HBox.margin>
                   <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
                </HBox.margin>
@@ -67,14 +67,33 @@
          </BorderPane.margin>
       </HBox>
    </bottom>
-   <padding>
-      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-   </padding>
    <top>
-      <HBox alignment="CENTER" prefHeight="70.0" prefWidth="720.0" BorderPane.alignment="CENTER">
-         <BorderPane.margin>
+      <VBox BorderPane.alignment="CENTER">
+         <children>
+            <HBox fx:id="title_bar" alignment="CENTER_LEFT" minHeight="36.0" prefHeight="36.0" style="-fx-background-color: #f3f3f3; -fx-border-color: #d0d0d0; -fx-border-width: 0 0 1 0;">
+               <children>
+                  <Label fx:id="label_title" maxWidth="Infinity" text="Ajuster Luminosité/Contraste" HBox.hgrow="ALWAYS">
+                     <font>
+                        <Font name="Arial" size="13.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="12.0" right="12.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Button fx:id="button_exit" mnemonicParsing="false" onAction="#button_exit_action_event" prefHeight="36.0" prefWidth="46.0" minHeight="36.0" minWidth="46.0" maxHeight="36.0" maxWidth="46.0" style="-fx-background-color: #E81123; -fx-background-radius: 0; -fx-border-width: 0; -fx-cursor: hand;" text="✕" textFill="WHITE">
+                     <font>
+                        <Font name="Arial" size="14.0" />
+                     </font>
+                     <tooltip>
+                        <Tooltip text="Fermer" />
+                     </tooltip>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="70.0" prefWidth="720.0">
+         <VBox.margin>
             <Insets left="10.0" right="10.0" top="10.0" />
-         </BorderPane.margin>
+         </VBox.margin>
          <children>
             <Label fx:id="label_max" alignment="CENTER" prefHeight="30.0" prefWidth="41.0" text="0" textFill="#00ff40">
                <HBox.margin>
@@ -118,6 +137,8 @@
             </Label>
          </children>
       </HBox>
+         </children>
+      </VBox>
    </top>
    <center>
       <VBox alignment="CENTER" minHeight="350.0" minWidth="500.0" prefHeight="350.0" prefWidth="500.0" BorderPane.alignment="CENTER">

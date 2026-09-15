@@ -445,21 +445,6 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </HBox.margin>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#file_closeImage">
-                     <graphic>
-                        <ImageView disable="true" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@/icons/close.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <tooltip>
-                        <Tooltip text="Fermer l'image" />
-                     </tooltip>
-                     <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin>
-                  </Button>
                   <Button fx:id="button_image_statistics_rgb" mnemonicParsing="false" onAction="#main_image_statistics_rgb">
                      <graphic>
                         <ImageView disable="true" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true">
@@ -470,6 +455,66 @@
                      </graphic>
                      <tooltip>
                         <Tooltip text="Statistiques RGB" />
+                     </tooltip>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="button_image_undo" disable="true" mnemonicParsing="false" onAction="#image_undo">
+                     <graphic>
+                        <ImageView disable="true" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@/icons/iconfinder_arrow-left-01_186410.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Retour en arrière" />
+                     </tooltip>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="button_image_redo" disable="true" mnemonicParsing="false" onAction="#image_redo">
+                     <graphic>
+                        <ImageView disable="true" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@/icons/iconfinder_arrow-right-01_186409.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Retour en avant" />
+                     </tooltip>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="button_image_restore" disable="true" mnemonicParsing="false" onAction="#image_restore">
+                     <graphic>
+                        <ImageView disable="true" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@/icons/reset-512.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Rétablir l'image initiale" />
+                     </tooltip>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#file_closeImage">
+                     <graphic>
+                        <ImageView disable="true" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@/icons/close.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Fermer l'image" />
                      </tooltip>
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

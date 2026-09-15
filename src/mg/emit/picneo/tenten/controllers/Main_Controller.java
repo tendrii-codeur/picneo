@@ -24,6 +24,7 @@ import ij.ImagePlus;
 import ij.WindowManager;
 import ij.gui.HistogramWindow;
 import ij.io.FileSaver;
+import ij.io.OpenDialog;
 import ij.plugin.filter.RankFilters;
 import ij.plugin.*;
 import ij.process.ImageProcessor;
@@ -53,9 +54,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.stage.Window;
 
 
 public class Main_Controller {
@@ -68,6 +71,15 @@ public class Main_Controller {
 
     @FXML
     public Button button_image_statistics_rgb;
+
+    @FXML
+    public Button button_image_undo;
+
+    @FXML
+    public Button button_image_redo;
+
+    @FXML
+    public Button button_image_restore;
 
     @FXML
     public Button button_image_statistics_rgb_roi;
@@ -189,6 +201,9 @@ public class Main_Controller {
 
     private ArrayList<ImageView> iv_array = new ArrayList<ImageView>();
     private ArrayList<ImagePlus> ip_array = new ArrayList<ImagePlus>();
+    private ArrayList<ArrayList<ImagePlus>> image_history = new ArrayList<ArrayList<ImagePlus>>();
+    private ArrayList<Integer> image_history_index = new ArrayList<Integer>();
+    private boolean record_image_history = true;
 
     private Image default_image;
 
@@ -336,12 +351,14 @@ public class Main_Controller {
             controller.setImage(image);
 
             Stage stage = new Stage();
+            String title = "Statistiques RGB pour " + current_image.getTitle();
 
             stage.setResizable(false);
             stage.initModality(Modality.APPLICATION_MODAL);
-            stage.initStyle(StageStyle.UTILITY);
-            stage.setTitle("Statistiques RGB pour " + current_image.getTitle());
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setTitle(title);
             stage.setScene(new Scene(root));
+            controller.setWindowTitle(title);
 
             stage.showAndWait();
         } catch (Exception e) {
@@ -378,12 +395,14 @@ public class Main_Controller {
             controller.setImage(image.duplicate());
 
             Stage stage = new Stage();
+            String title = "Statistiques RGB de la ROI pour " + current_image.getTitle();
 
             stage.setResizable(false);
             stage.initModality(Modality.APPLICATION_MODAL);
-            stage.initStyle(StageStyle.UTILITY);
-            stage.setTitle("Statistiques RGB de la ROI pour " + current_image.getTitle());
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setTitle(title);
             stage.setScene(new Scene(root));
+            controller.setWindowTitle(title);
 
             stage.showAndWait();
         } catch (Exception e) {
@@ -427,12 +446,14 @@ public class Main_Controller {
             controller.setImage(image.duplicate());
 
             Stage stage = new Stage();
+            String title = "Analyse des particules pour " + current_image.getTitle();
 
             stage.setResizable(false);
             stage.initModality(Modality.APPLICATION_MODAL);
-            stage.initStyle(StageStyle.UTILITY);
-            stage.setTitle("Analyse des particules pour " + current_image.getTitle());
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setTitle(title);
             stage.setScene(new Scene(root));
+            controller.setWindowTitle(title);
 
             stage.showAndWait();
         } catch (Exception e) {
@@ -482,6 +503,8 @@ public class Main_Controller {
         iv_array.get(id).setImage(default_image);
 
         ip_array.remove(ip_array.get(id));
+        image_history.remove(id.intValue());
+        image_history_index.remove(id.intValue());
 
         if (ip_array.size() == 0) {
             stitching_menuItem_pairwise.setDisable(true);
@@ -523,6 +546,8 @@ public class Main_Controller {
                 }
 
                 ip_array.removeAll(ip_array);
+                image_history.clear();
+                image_history_index.clear();
                 stitching_menuItem_pairwise.setDisable(true);
                 onImageClosed();
             }
@@ -552,8 +577,13 @@ public class Main_Controller {
         if (ip_array.size() < 9) {
 
             try {
+                File file = chooseImageFile();
+                if (file == null) {
+                    return;
+                }
+
                 current_image = new ImagePlus();
-                current_image = IJ.openImage();
+                current_image = IJ.openImage(file.getAbsolutePath());
                 file_openImage_check(current_image);
             } catch (NullPointerException e) {
             }
@@ -562,6 +592,32 @@ public class Main_Controller {
             alert.setTitle("Avertissement !");
             alert.showAndWait();
         }
+    }
+
+    private File chooseImageFile() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Ouvrir une image...");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Images",
+                        "*.tif", "*.tiff", "*.jpg", "*.jpeg", "*.png", "*.gif",
+                        "*.bmp", "*.pgm", "*.fits", "*.fit", "*.fts", "*.zip", "*.raw"),
+                new FileChooser.ExtensionFilter("Tous les fichiers", "*.*"));
+
+        String lastDirectory = OpenDialog.getLastDirectory();
+        if (lastDirectory != null) {
+            File directory = new File(lastDirectory);
+            if (directory.isDirectory()) {
+                fileChooser.setInitialDirectory(directory);
+            }
+        }
+
+        Window owner = button_close_all.getScene().getWindow();
+        owner.requestFocus();
+        File file = fileChooser.showOpenDialog(owner);
+        if (file != null && file.getParent() != null) {
+            OpenDialog.setLastDirectory(file.getParent() + File.separator);
+        }
+        return file;
     }
 
     public void file_openImage_check(
@@ -587,6 +643,7 @@ public class Main_Controller {
             Image image_preview_fx = SwingFXUtils.toFXImage(image.getProcessor().getBufferedImage(), null);
 
             ip_array.add(image);
+            initializeImageHistory(image);
 
             iv_array.get(ip_array.size() - 1).setImage(image_preview_fx);
             Tooltip.install(iv_array.get(ip_array.size() - 1), new Tooltip(image.getTitle().toString()));
@@ -743,12 +800,14 @@ public class Main_Controller {
             controller.setImage(image.getProcessor().getMin(), image.getProcessor().getMax(), image.duplicate());
 
             Stage stage = new Stage();
+            String title = "Ajuster Luminosité/Contraste pour " + current_image.getTitle();
 
             stage.setResizable(false);
             stage.initModality(Modality.APPLICATION_MODAL);
-            stage.initStyle(StageStyle.UTILITY);
-            stage.setTitle("Ajuster Luminosité/Contraste pour " + current_image.getTitle());
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setTitle(title);
             stage.setScene(new Scene(root));
+            controller.setWindowTitle(title);
 
             stage.showAndWait();
 
@@ -772,12 +831,14 @@ public class Main_Controller {
             controller.setImage(current_image.duplicate());
 
             Stage stage = new Stage();
+            String title = "Convertir le type d'image pour " + current_image.getTitle();
 
             stage.setResizable(false);
             stage.initModality(Modality.APPLICATION_MODAL);
-            stage.initStyle(StageStyle.UTILITY);
-            stage.setTitle("Convertir le type d'image pour " + current_image.getTitle());
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setTitle(title);
             stage.setScene(new Scene(root));
+            controller.setWindowTitle(title);
 
             stage.showAndWait();
 
@@ -1112,7 +1173,7 @@ public class Main_Controller {
         RankFilters filter = new RankFilters();
         filter.rank(image_backup.getProcessor(), 1.0, RankFilters.MEDIAN);
 
-        current_image.setProcessor(image_backup.getProcessor());
+        setImageProcessor(image_backup.getProcessor());
     }
 
     @FXML
@@ -1464,6 +1525,7 @@ public class Main_Controller {
 
         button_image_statistics_rgb.setDisable(true);
         button_image_statistics_rgb_roi.setDisable(true);
+        updateImageHistoryButtons();
     }
 
     private void setCurrentImage(Integer id) {
@@ -1493,6 +1555,7 @@ public class Main_Controller {
             show_image_roi();
             getImageStats(current_image);
             onImageOpened();
+            updateImageHistoryButtons();
         }
     }
 
@@ -1526,6 +1589,9 @@ public class Main_Controller {
 
         show_image_roi();
         getImageStats(current_image);
+        checkIfImageIsRgb();
+        recordCurrentImageHistory();
+        updateImageHistoryButtons();
     }
 
     private void setImagePlus(ImagePlus ip) {
@@ -1533,7 +1599,9 @@ public class Main_Controller {
         Integer id = Integer.parseInt(iv_current_image.getAccessibleText());
 
         current_image = ip.duplicate();
+        current_image.setTitle(ip.getTitle());
         ip_array.get(id).setImage(ip.duplicate());
+        ip_array.get(id).setTitle(ip.getTitle());
 
         Image image_preview_fx1 = SwingFXUtils.toFXImage(current_image.getImageStack().getProcessor(position).getBufferedImage(), null);
         iv_current_image.setImage(image_preview_fx1);
@@ -1553,6 +1621,127 @@ public class Main_Controller {
 
         show_image_roi();
         getImageStats(current_image);
+        checkIfImageIsRgb();
+        recordCurrentImageHistory();
+        updateImageHistoryButtons();
+    }
+
+    @FXML
+    public void image_undo() {
+        applyImageHistoryStep(-1);
+    }
+
+    @FXML
+    public void image_redo() {
+        applyImageHistoryStep(1);
+    }
+
+    @FXML
+    public void image_restore() {
+        Integer id = getCurrentImageHistoryId();
+        if (id == null || id >= image_history.size()) {
+            return;
+        }
+
+        ArrayList<ImagePlus> history = image_history.get(id);
+        if (history.isEmpty() || image_history_index.get(id) <= 0) {
+            return;
+        }
+
+        ImagePlus original = history.get(0);
+        while (history.size() > 1) {
+            history.remove(history.size() - 1);
+        }
+        image_history_index.set(id, 0);
+        restoreImageFromHistory(original);
+    }
+
+    private void initializeImageHistory(ImagePlus image) {
+        ArrayList<ImagePlus> history = new ArrayList<ImagePlus>();
+        history.add(duplicateImageState(image));
+        image_history.add(history);
+        image_history_index.add(0);
+    }
+
+    private void recordCurrentImageHistory() {
+        if (!record_image_history || current_image == null) {
+            return;
+        }
+
+        Integer id = getCurrentImageHistoryId();
+        if (id == null || id >= image_history.size()) {
+            return;
+        }
+
+        ArrayList<ImagePlus> history = image_history.get(id);
+        int index = image_history_index.get(id);
+        while (history.size() > index + 1) {
+            history.remove(history.size() - 1);
+        }
+
+        history.add(duplicateImageState(current_image));
+        image_history_index.set(id, history.size() - 1);
+    }
+
+    private void applyImageHistoryStep(int direction) {
+        Integer id = getCurrentImageHistoryId();
+        if (id == null || id >= image_history.size()) {
+            return;
+        }
+
+        int index = image_history_index.get(id) + direction;
+        ArrayList<ImagePlus> history = image_history.get(id);
+        if (index < 0 || index >= history.size()) {
+            return;
+        }
+
+        image_history_index.set(id, index);
+        restoreImageFromHistory(history.get(index));
+    }
+
+    private void restoreImageFromHistory(ImagePlus image) {
+        record_image_history = false;
+        setImagePlus(duplicateImageState(image));
+        record_image_history = true;
+        updateImageHistoryButtons();
+    }
+
+    private ImagePlus duplicateImageState(ImagePlus image) {
+        ImagePlus copy = image.duplicate();
+        copy.setTitle(image.getTitle());
+        return copy;
+    }
+
+    private Integer getCurrentImageHistoryId() {
+        if (iv_current_image.getAccessibleText() == null || iv_current_image.getAccessibleText().isEmpty()) {
+            return null;
+        }
+        return Integer.parseInt(iv_current_image.getAccessibleText());
+    }
+
+    private void updateImageHistoryButtons() {
+        boolean canUndo = false;
+        boolean canRedo = false;
+        boolean canRestore = false;
+
+        Integer id = getCurrentImageHistoryId();
+        if (id != null && id < image_history.size() && id < image_history_index.size()) {
+            int index = image_history_index.get(id);
+            int lastIndex = image_history.get(id).size() - 1;
+            canUndo = index > 0;
+            canRedo = index < lastIndex;
+            canRestore = index > 0;
+        }
+
+        if (button_image_undo != null) {
+            button_image_undo.setDisable(!canUndo);
+        }
+        if (button_image_redo != null) {
+            button_image_redo.setDisable(!canRedo);
+        }
+        if (button_image_restore != null) {
+            button_image_restore.setDisable(!canRestore);
+        }
     }
 
     private void showRoiHistogram(ImagePlus ip) {

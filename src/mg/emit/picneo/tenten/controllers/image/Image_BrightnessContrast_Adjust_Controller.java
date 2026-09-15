@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import mg.emit.picneo.tenten.util.FrenchHistogramWindow;
 
@@ -25,6 +26,15 @@ public class Image_BrightnessContrast_Adjust_Controller {
 	@FXML 
 	public Button button_cancel;
 	
+	@FXML
+	public Button button_exit;
+
+	@FXML
+	public Label label_title;
+
+	@FXML
+	public HBox title_bar;
+
 	@FXML
 	public Slider slider_min;
 	
@@ -53,6 +63,8 @@ public class Image_BrightnessContrast_Adjust_Controller {
 	
 	private ImagePlus image = new ImagePlus();
 	private ImagePlus image_preview_ip = new ImagePlus();
+	private double dragOffsetX;
+	private double dragOffsetY;
 	
 	@FXML
 	public void initialize(){
@@ -64,6 +76,7 @@ public class Image_BrightnessContrast_Adjust_Controller {
 			if(max_current_value <= min_current_value) {
 				slider_max.setValue(min_current_value);
 			}
+			updateActionButtonsEnabled();
 		});
         
 		slider_max.valueProperty().addListener((observable, oldValue, newValue) -> {
@@ -73,7 +86,10 @@ public class Image_BrightnessContrast_Adjust_Controller {
 			if(max_current_value <= min_current_value) {
 				slider_min.setValue(max_current_value);
 			}
+			updateActionButtonsEnabled();
 		});
+
+		bindTitleBar();
     }
 	
 	@FXML
@@ -118,17 +134,51 @@ public class Image_BrightnessContrast_Adjust_Controller {
 	}
 	
 	public void setImage(Double min_value, Double max_value, ImagePlus ip) {
-		
-		image = new ImagePlus();
-		
-		this.slider_min.setValue(min_value);
-		this.slider_max.setValue(max_value);
 		this.min_default_value = min_value;
 		this.max_default_value = max_value;
+		this.min_current_value = min_value;
+		this.max_current_value = max_value;
+		this.slider_min.setValue(min_value);
+		this.slider_max.setValue(max_value);
 		this.image = ip.duplicate();
-		
+		updateActionButtonsEnabled();
+	}
+
+	private void updateActionButtonsEnabled() {
+		boolean modified = (int) min_current_value != (int) min_default_value
+				|| (int) max_current_value != (int) max_default_value;
+		button_adjust.setDisable(!modified);
+		button_reset.setDisable(!modified);
 	}
 	
+	@FXML
+	public void button_exit_action_event(ActionEvent event) {
+		button_cancel_action_event(event);
+	}
+
+	public void setWindowTitle(String title) {
+		if (label_title != null) {
+			label_title.setText(title);
+		}
+	}
+
+	private void bindTitleBar() {
+		button_exit.setOnMouseEntered(event -> button_exit.setStyle(
+				"-fx-background-color: #F1707A; -fx-background-radius: 0; -fx-border-width: 0; -fx-cursor: hand;"));
+		button_exit.setOnMouseExited(event -> button_exit.setStyle(
+				"-fx-background-color: #E81123; -fx-background-radius: 0; -fx-border-width: 0; -fx-cursor: hand;"));
+
+		title_bar.setOnMousePressed(event -> {
+			dragOffsetX = event.getSceneX();
+			dragOffsetY = event.getSceneY();
+		});
+		title_bar.setOnMouseDragged(event -> {
+			Stage stage = (Stage) button_exit.getScene().getWindow();
+			stage.setX(event.getScreenX() - dragOffsetX);
+			stage.setY(event.getScreenY() - dragOffsetY);
+		});
+	}
+
 	public boolean getStageClosedOnExit() {
 		return stage_closed_on_exit_status;
 	}
