@@ -2,45 +2,86 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="676.0" prefWidth="552.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mg.emit.picneo.tenten.controllers.process.Process_Shadow_Controller">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="560.0" style="-fx-background-color: white; -fx-border-color: #9a9a9a; -fx-border-width: 1;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mg.emit.picneo.tenten.controllers.process.Process_Shadow_Controller">
+   <top>
+      <VBox>
+         <children>
+            <HBox fx:id="title_bar" alignment="CENTER_LEFT" minHeight="36.0" prefHeight="36.0" style="-fx-background-color: #f3f3f3; -fx-border-color: #d0d0d0; -fx-border-width: 0 0 1 0;">
+               <children>
+                  <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@/icons/shadow.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets left="12.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <Label fx:id="label_title" maxWidth="Infinity" text="Ombrage" HBox.hgrow="ALWAYS">
+                     <font>
+                        <Font name="Arial" size="13.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="12.0" right="12.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Button fx:id="button_exit" mnemonicParsing="false" onAction="#button_exit_action_event" prefHeight="36.0" prefWidth="46.0" minHeight="36.0" minWidth="46.0" maxHeight="36.0" maxWidth="46.0" style="-fx-background-color: #E81123; -fx-background-radius: 0; -fx-border-width: 0; -fx-cursor: hand;" text="✕" textFill="WHITE">
+                     <font>
+                        <Font name="Arial" size="14.0" />
+                     </font>
+                     <tooltip>
+                        <Tooltip text="Fermer" />
+                     </tooltip>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </top>
    <center>
-      <ImageView fx:id="imageView_preview" fitHeight="350.0" fitWidth="500.0" onMouseClicked="#imageView_preview_onClick" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" spacing="8.0" BorderPane.alignment="CENTER">
+         <children>
+            <Text fx:id="textView_position" strokeType="OUTSIDE" strokeWidth="0.0" text="POSITION">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Text>
+            <ImageView fx:id="imageView_preview" fitHeight="350.0" fitWidth="500.0" onMouseClicked="#imageView_preview_onClick" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@/empty-image.png" />
+               </image>
+            </ImageView>
+         </children>
          <BorderPane.margin>
-            <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+            <Insets bottom="2.0" left="20.0" right="20.0" top="8.0" />
          </BorderPane.margin>
-         <image>
-            <Image url="@../../../../../../../empty-image.png" />
-         </image>
-      </ImageView>
+      </VBox>
    </center>
    <bottom>
-      <VBox alignment="CENTER" prefHeight="0.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <Label text="Direction de l'ombrage">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <GridPane alignment="CENTER" hgap="8.0" vgap="8.0">
                <children>
-                  <Button fx:id="button_north_west" minHeight="55.0" minWidth="65.0" mnemonicParsing="false" onAction="#button_north_west_onClick" prefHeight="55.0" prefWidth="65.0">
-                     <padding>
-                        <Insets bottom="15.0" left="20.0" right="20.0" top="15.0" />
-                     </padding>
-                     <HBox.margin>
-                        <Insets bottom="15.0" right="125.0" top="15.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font name="Bell MT Bold" size="14.0" />
-                     </font>
+                  <Button fx:id="button_north_west" mnemonicParsing="false" onAction="#button_north_west_onClick" prefHeight="42.0" prefWidth="42.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
                      <graphic>
-                        <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../../../../icons/441088.png" />
+                              <Image url="@/icons/441088.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -48,17 +89,11 @@
                         <Tooltip text="Nord-Ouest" />
                      </tooltip>
                   </Button>
-                  <Button fx:id="button_north" minHeight="55.0" minWidth="65.0" mnemonicParsing="false" onAction="#button_north_onClick" prefHeight="55.0" prefWidth="65.0">
-                     <padding>
-                        <Insets bottom="15.0" left="20.0" right="20.0" top="15.0" />
-                     </padding>
-                     <font>
-                        <Font name="Bell MT Bold" size="14.0" />
-                     </font>
+                  <Button fx:id="button_north" mnemonicParsing="false" onAction="#button_north_onClick" prefHeight="42.0" prefWidth="42.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
                      <graphic>
-                        <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../../../../icons/441086.png" />
+                              <Image url="@/icons/441086.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -66,20 +101,11 @@
                         <Tooltip text="Nord" />
                      </tooltip>
                   </Button>
-                  <Button fx:id="button_north_east" minHeight="55.0" minWidth="65.0" mnemonicParsing="false" onAction="#button_north_east_onClick" prefHeight="55.0" prefWidth="65.0">
-                     <padding>
-                        <Insets bottom="15.0" left="20.0" right="20.0" top="15.0" />
-                     </padding>
-                     <HBox.margin>
-                        <Insets bottom="15.0" left="125.0" top="15.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font name="Bell MT Bold" size="14.0" />
-                     </font>
+                  <Button fx:id="button_north_east" mnemonicParsing="false" onAction="#button_north_east_onClick" prefHeight="42.0" prefWidth="42.0" GridPane.columnIndex="2" GridPane.rowIndex="0">
                      <graphic>
-                        <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../../../../icons/441087.png" />
+                              <Image url="@/icons/441087.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -87,27 +113,11 @@
                         <Tooltip text="Nord-Est" />
                      </tooltip>
                   </Button>
-               </children>
-               <VBox.margin>
-                  <Insets left="10.0" right="10.0" />
-               </VBox.margin>
-            </HBox>
-            <HBox alignment="CENTER" layoutX="20.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <Button fx:id="button_west" minHeight="55.0" minWidth="65.0" mnemonicParsing="false" onAction="#button_west_onClick" prefHeight="55.0" prefWidth="65.0">
-                     <padding>
-                        <Insets bottom="15.0" left="20.0" right="20.0" top="15.0" />
-                     </padding>
-                     <HBox.margin>
-                        <Insets right="10.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font name="Bell MT Bold" size="14.0" />
-                     </font>
+                  <Button fx:id="button_west" mnemonicParsing="false" onAction="#button_west_onClick" prefHeight="42.0" prefWidth="42.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
                      <graphic>
-                        <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../../../../icons/441127.png" />
+                              <Image url="@/icons/441127.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -115,71 +125,11 @@
                         <Tooltip text="Ouest" />
                      </tooltip>
                   </Button>
-                  <Button fx:id="button_adjust" minHeight="55.0" minWidth="65.0" mnemonicParsing="false" onAction="#button_adjust_action_event" prefHeight="55.0" prefWidth="65.0">
-                     <padding>
-                        <Insets bottom="15.0" left="20.0" right="20.0" top="15.0" />
-                     </padding>
-                     <HBox.margin>
-                        <Insets bottom="15.0" left="25.0" right="25.0" top="15.0" />
-                     </HBox.margin>
+                  <Button fx:id="button_east" mnemonicParsing="false" onAction="#button_east_onClick" prefHeight="42.0" prefWidth="42.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <graphic>
-                        <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../../../../icons/adjust.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <tooltip>
-                        <Tooltip text="Appliquer" />
-                     </tooltip>
-                  </Button>
-                  <Button fx:id="button_reset" layoutX="185.0" layoutY="26.0" minHeight="55.0" minWidth="65.0" mnemonicParsing="false" onAction="#button_reset_action_event" prefHeight="55.0" prefWidth="65.0">
-                     <padding>
-                        <Insets bottom="15.0" left="20.0" right="20.0" top="15.0" />
-                     </padding>
-                     <graphic>
-                        <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../../../../../icons/convert.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <tooltip>
-                        <Tooltip text="Réinitialiser" />
-                     </tooltip>
-                  </Button>
-                  <Button fx:id="button_cancel" minHeight="55.0" minWidth="65.0" mnemonicParsing="false" onAction="#button_cancel_action_event" prefHeight="55.0" prefWidth="65.0">
-                     <padding>
-                        <Insets bottom="15.0" left="20.0" right="20.0" top="15.0" />
-                     </padding>
-                     <HBox.margin>
-                        <Insets bottom="15.0" left="25.0" right="25.0" top="15.0" />
-                     </HBox.margin>
-                     <graphic>
-                        <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../../../../../icons/close.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <tooltip>
-                        <Tooltip text="Fermer" />
-                     </tooltip>
-                  </Button>
-                  <Button fx:id="button_east" minHeight="55.0" minWidth="65.0" mnemonicParsing="false" onAction="#button_east_onClick" prefHeight="55.0" prefWidth="65.0">
-                     <padding>
-                        <Insets bottom="15.0" left="20.0" right="20.0" top="15.0" />
-                     </padding>
-                     <HBox.margin>
-                        <Insets left="10.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font name="Bell MT Bold" size="14.0" />
-                     </font>
-                     <graphic>
-                        <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../../../../../icons/352352.png" />
+                              <Image url="@/icons/352352.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -187,24 +137,11 @@
                         <Tooltip text="Est" />
                      </tooltip>
                   </Button>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" layoutX="10.0" layoutY="88.0" prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <Button fx:id="button_south_west" minHeight="55.0" minWidth="65.0" mnemonicParsing="false" onAction="#button_south_west_onClick" prefHeight="55.0" prefWidth="65.0">
-                     <padding>
-                        <Insets bottom="15.0" left="20.0" right="20.0" top="15.0" />
-                     </padding>
-                     <HBox.margin>
-                        <Insets bottom="15.0" right="125.0" top="15.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font name="Bell MT Bold" size="14.0" />
-                     </font>
+                  <Button fx:id="button_south_west" mnemonicParsing="false" onAction="#button_south_west_onClick" prefHeight="42.0" prefWidth="42.0" GridPane.columnIndex="0" GridPane.rowIndex="2">
                      <graphic>
-                        <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../../../../icons/441107.png" />
+                              <Image url="@/icons/441107.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -212,17 +149,11 @@
                         <Tooltip text="Sud-Ouest" />
                      </tooltip>
                   </Button>
-                  <Button fx:id="button_south" minHeight="55.0" minWidth="65.0" mnemonicParsing="false" onAction="#button_south_onClick" prefHeight="55.0" prefWidth="65.0">
-                     <padding>
-                        <Insets bottom="15.0" left="20.0" right="20.0" top="15.0" />
-                     </padding>
-                     <font>
-                        <Font name="Bell MT Bold" size="14.0" />
-                     </font>
+                  <Button fx:id="button_south" mnemonicParsing="false" onAction="#button_south_onClick" prefHeight="42.0" prefWidth="42.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <graphic>
-                        <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../../../../icons/441105.png" />
+                              <Image url="@/icons/441105.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -230,20 +161,11 @@
                         <Tooltip text="Sud" />
                      </tooltip>
                   </Button>
-                  <Button fx:id="button_south_east" minHeight="55.0" minWidth="65.0" mnemonicParsing="false" onAction="#button_south_east_onClick" prefHeight="55.0" prefWidth="65.0">
-                     <padding>
-                        <Insets bottom="15.0" left="20.0" right="20.0" top="15.0" />
-                     </padding>
-                     <HBox.margin>
-                        <Insets bottom="15.0" left="125.0" top="15.0" />
-                     </HBox.margin>
-                     <font>
-                        <Font name="Bell MT Bold" size="14.0" />
-                     </font>
+                  <Button fx:id="button_south_east" mnemonicParsing="false" onAction="#button_south_east_onClick" prefHeight="42.0" prefWidth="42.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
                      <graphic>
-                        <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../../../../icons/441106.png" />
+                              <Image url="@/icons/441106.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -252,21 +174,69 @@
                      </tooltip>
                   </Button>
                </children>
+            </GridPane>
+            <HBox alignment="CENTER" spacing="14.0">
+               <children>
+                  <Button fx:id="button_adjust" disable="true" mnemonicParsing="false" onAction="#button_adjust_action_event" text="Appliquer">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@/icons/adjust.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Appliquer et fermer" />
+                     </tooltip>
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets bottom="15.0" left="8.0" right="8.0" top="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="button_reset" disable="true" mnemonicParsing="false" onAction="#button_reset_action_event" text="Réinitialiser">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@/icons/reset-512.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Réinitialiser les réglages" />
+                     </tooltip>
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets bottom="15.0" left="8.0" right="8.0" top="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="button_cancel" mnemonicParsing="false" onAction="#button_cancel_action_event" text="Annuler">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@/icons/close.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Fermer sans appliquer" />
+                     </tooltip>
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets bottom="15.0" left="8.0" right="8.0" top="10.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
             </HBox>
          </children>
          <BorderPane.margin>
-            <Insets bottom="10.0" left="10.0" right="10.0" />
+            <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
          </BorderPane.margin>
       </VBox>
    </bottom>
-   <top>
-      <Text fx:id="textView_position" strokeType="OUTSIDE" strokeWidth="0.0" text="POSITION" BorderPane.alignment="CENTER">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-         <BorderPane.margin>
-            <Insets bottom="20.0" left="25.0" right="25.0" top="20.0" />
-         </BorderPane.margin>
-      </Text>
-   </top>
 </BorderPane>

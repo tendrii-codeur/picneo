@@ -1,15 +1,31 @@
 package mg.emit.picneo.tenten.controllers.file;
 
+import mg.emit.picneo.tenten.controllers.Tool_Dialog_Controller;
+import mg.emit.picneo.tenten.util.TitleBar_Util;
+
 import ij.ImagePlus;
 import ij.io.FileSaver;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import mg.emit.picneo.tenten.util.Alert_Util;
 
-public class File_SaveAs_Controller {
+public class File_SaveAs_Controller implements Tool_Dialog_Controller {
+
+	@FXML
+	public Button button_exit;
+
+	@FXML
+	public Label label_title;
+
+	@FXML
+	public HBox title_bar;
 
 	@FXML
 	public Button button_save;
@@ -48,12 +64,32 @@ public class File_SaveAs_Controller {
 	public Button button_save_zip;
 	
 	private ImagePlus image_preview_ip = new ImagePlus();
+
+
+	@FXML
+	public void initialize() {
+		TitleBar_Util.bind(title_bar, button_exit);
+	}
+
+	@FXML
+	public void button_exit_action_event(ActionEvent event) {
+		Stage stage = (Stage) button_exit.getScene().getWindow();
+		stage.close();
+	}
+
+	public void setWindowTitle(String title) {
+		if (label_title != null) {
+			label_title.setText(title);
+		}
+	}
+
 	
+	@FXML
 	public void file_saveImage() {
-		
+
 		FileSaver filesaver = new FileSaver(image_preview_ip);
-	
-		if(filesaver.save() == true) {
+
+		if(filesaver.save()) {
 			file_saveSuccessfullMessage(image_preview_ip.getTitle(), button_save);
 		}
 	}
@@ -73,8 +109,11 @@ public class File_SaveAs_Controller {
 		
 		FileSaver filesaver = new FileSaver(image_preview_ip);
 				
-		if(filesaver.saveAsFits() == true) {
+		if(filesaver.saveAsFits()) {
 			file_saveSuccessfullMessage(image_preview_ip.getTitle(), button_save_fits);
+		}
+		else {
+			file_saveAsFitsFailedMessage();
 		}
 	}
 			
@@ -159,11 +198,12 @@ public class File_SaveAs_Controller {
 		}
 	}
 			
+	@FXML
 	public void file_saveImageAsZip() {
-		
+
 		FileSaver filesaver = new FileSaver(image_preview_ip);
-				
-		if(filesaver.saveAsZip() == true) {
+
+		if(filesaver.saveAsZip()) {
 			file_saveSuccessfullMessage(image_preview_ip.getTitle(), button_save_zip);
 		}
 	}
@@ -171,6 +211,7 @@ public class File_SaveAs_Controller {
 	public void file_saveSuccessfullMessage(String imageTitle, Button button) {
 		Alert alert = new Alert(AlertType.INFORMATION, imageTitle + " a été enregistrée avec succès !", ButtonType.OK);
 		alert.setTitle("Enregistrement réussi !");
+		Alert_Util.style(alert);
 		alert.showAndWait();
 		
 		Stage stage = (Stage) button.getScene().getWindow();
@@ -180,19 +221,19 @@ public class File_SaveAs_Controller {
 	public void file_saveAsFitsFailedMessage() {
 		Alert alert = new Alert(AlertType.ERROR, "L'enregistrement a été annulé ou l'image actuelle n'est pas en niveaux de gris !", ButtonType.OK);
 		alert.setTitle("Erreur d'enregistrement !");
+		Alert_Util.style(alert);
 		alert.showAndWait();
 	}
 		
 	public void file_saveAsLutFailedMessage() {
 		Alert alert = new Alert(AlertType.ERROR, "L'enregistrement a été annulé ou les images RGB ne sont pas autorisées !", ButtonType.OK);
 		alert.setTitle("Erreur d'enregistrement !");
+		Alert_Util.style(alert);
 		alert.showAndWait();
 	}
 	
 	public void setImage(ImagePlus ip) {
-		
-		image_preview_ip = new ImagePlus();
-		
+
 		this.image_preview_ip = ip;
 	}
 	

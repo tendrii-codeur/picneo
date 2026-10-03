@@ -17,7 +17,9 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Priority?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -50,9 +52,6 @@
                   <Menu fx:id="image_menu_threshold" disable="true" mnemonicParsing="false" text="Seuillage">
                      <items>
                         <MenuItem mnemonicParsing="false" onAction="#image_threshold_adjust" text="Ajuster..." />
-                        <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem mnemonicParsing="false" onAction="#image_threshold_auto" text="Automatique..." />
-                        <MenuItem mnemonicParsing="false" onAction="#image_threshold_auto_instant" text="Auto instantané" />
                      </items>
                   </Menu>
                </items>
@@ -91,10 +90,9 @@
                 <MenuItem fx:id="analyze_particles" disable="true" mnemonicParsing="false" onAction="#analyze_particles" text="Analyser les particules" />
               </items>
             </Menu>
-            <Menu mnemonicParsing="false" text="Assemblage">
+            <Menu mnemonicParsing="false" text="Collage">
               <items>
-                <MenuItem fx:id="stitching_menuItem_pairwise" disable="true" mnemonicParsing="false" onAction="#plugin_stiching_pairwise" text="Assemblage par paire" />
-                  <MenuItem mnemonicParsing="false" onAction="#plugin_stitching_grid" text="Assemblage en grille" />
+                <MenuItem fx:id="collage_menuItem_create" disable="true" mnemonicParsing="false" onAction="#plugin_collage" text="Créer un collage..." />
               </items>
             </Menu>
          </menus>
@@ -108,7 +106,7 @@
       </ToolBar>
    </bottom>
    <left>
-      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <VBox alignment="TOP_CENTER" maxWidth="420.0" minWidth="380.0" prefHeight="200.0" prefWidth="380.0" BorderPane.alignment="CENTER" fillWidth="true">
          <children>
             <HBox alignment="CENTER" prefHeight="49.0" prefWidth="387.0">
                <VBox.margin>
@@ -125,6 +123,36 @@
                      </graphic>
                      <tooltip>
                         <Tooltip text="Ouvrir une image" />
+                     </tooltip>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#file_captureCamera">
+                     <graphic>
+                        <ImageView disable="true" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@/icons/camera.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Capturer une image avec la caméra" />
+                     </tooltip>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="button_collage" disable="true" mnemonicParsing="false" onAction="#plugin_collage">
+                     <graphic>
+                        <ImageView disable="true" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@/icons/collage.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Créer un collage" />
                      </tooltip>
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -309,7 +337,10 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </VBox.margin>
             </Label>
-            <TextArea fx:id="ta_current_image" editable="false" prefHeight="180.0" prefWidth="367.0">
+            <TextArea fx:id="ta_current_image" editable="false" maxHeight="1.7976931348623157E308" prefHeight="220.0" prefWidth="360.0" wrapText="true">
+               <VBox.vgrow>
+                  <Priority fx:value="ALWAYS" />
+               </VBox.vgrow>
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
@@ -338,99 +369,84 @@
                <font>
                   <Font name="Impact" size="24.0" />
                </font></Label>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <FlowPane alignment="CENTER" hgap="10.0" vgap="10.0" prefHeight="100.0" minHeight="100.0" minWidth="0.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#show_image">
+                  <Button mnemonicParsing="false" onAction="#process_sharpen">
                      <graphic>
                         <ImageView disable="true" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@/icons/show.png" />
+                              <Image url="@/icons/sharpen.png" />
                            </image>
                         </ImageView>
                      </graphic>
                      <tooltip>
-                        <Tooltip text="Afficher l'image" />
+                        <Tooltip text="Netteté" />
                      </tooltip>
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </HBox.margin>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#image_adjustBrightnessContrast">
-                     <graphic>
-                        <ImageView disable="true" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true">
-                           <image>
-                              <Image url="@/icons/bc.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <tooltip>
-                        <Tooltip text="Luminosité et Contraste" />
-                     </tooltip>
-                     <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button mnemonicParsing="false" onAction="#image_ConvertType">
+                  <Button mnemonicParsing="false" onAction="#process_smooth">
                      <graphic>
                         <ImageView disable="true" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@/icons/convert.png" />
+                              <Image url="@/icons/smooth.png" />
                            </image>
                         </ImageView>
                      </graphic>
                      <tooltip>
-                        <Tooltip text="Convertir le type" />
+                        <Tooltip text="Lisser" />
                      </tooltip>
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </HBox.margin>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#image_threshold_auto_instant">
-                     <graphic>
-                        <ImageView disable="true" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true">
-                           <image>
-                              <Image url="@/icons/threshold.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <tooltip>
-                        <Tooltip text="Seuillage" />
-                     </tooltip>
-                     <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button mnemonicParsing="false" onAction="#process_filter">
-                     <graphic>
-                        <ImageView disable="true" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true">
-                           <image>
-                              <Image url="@/icons/filter.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <tooltip>
-                        <Tooltip text="Filtres" />
-                     </tooltip>
-                     <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button mnemonicParsing="false" onAction="#analyze_particles">
+                  <Button mnemonicParsing="false" onAction="#process_noise_despekle">
                      <graphic>
                         <ImageView disable="true" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@/icons/analysis.png" />
+                              <Image url="@/icons/noise_despeckle.png" />
                            </image>
                         </ImageView>
                      </graphic>
                      <tooltip>
-                        <Tooltip text="Analyser les particules" />
+                        <Tooltip text="Anti-parasite" />
                      </tooltip>
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </HBox.margin>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#file_save">
+                  <Button mnemonicParsing="false" onAction="#process_find_edges">
+                     <graphic>
+                        <ImageView disable="true" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@/icons/find_edges.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Détecter les contours" />
+                     </tooltip>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#process_invert">
+                     <graphic>
+                        <ImageView disable="true" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@/icons/invert.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Inverser" />
+                     </tooltip>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="button_save" mnemonicParsing="false" onAction="#file_save">
                      <graphic>
                         <ImageView disable="true" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -440,21 +456,6 @@
                      </graphic>
                      <tooltip>
                         <Tooltip text="Enregistrer l'image" />
-                     </tooltip>
-                     <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button fx:id="button_image_statistics_rgb" mnemonicParsing="false" onAction="#main_image_statistics_rgb">
-                     <graphic>
-                        <ImageView disable="true" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true">
-                           <image>
-                              <Image url="@/icons/RGB-icon.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <tooltip>
-                        <Tooltip text="Statistiques RGB" />
                      </tooltip>
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -521,13 +522,155 @@
                      </HBox.margin>
                   </Button>
                </children>
-            </HBox>
-            <StackPane alignment="CENTER" maxHeight="425.0" maxWidth="575.0" minHeight="425.0" minWidth="575.0" prefHeight="425.0" prefWidth="575.0">
+            </FlowPane>
+            <FlowPane alignment="CENTER" hgap="10.0" vgap="10.0" minWidth="0.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#image_adjustBrightnessContrast">
+                     <graphic>
+                        <ImageView disable="true" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@/icons/bc.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Luminosité et Contraste" />
+                     </tooltip>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#process_filter">
+                     <graphic>
+                        <ImageView disable="true" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@/icons/filter.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Filtres" />
+                     </tooltip>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#process_noise_add">
+                     <graphic>
+                        <ImageView disable="true" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@/icons/noise_add.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Ajouter du bruit" />
+                     </tooltip>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#process_filter_gaussian_blur">
+                     <graphic>
+                        <ImageView disable="true" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@/icons/gaussian_blur.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Flou gaussien" />
+                     </tooltip>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#process_filter_unsharp_mask">
+                     <graphic>
+                        <ImageView disable="true" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@/icons/unsharp_mask.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Masque flou" />
+                     </tooltip>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#process_shadow">
+                     <graphic>
+                        <ImageView disable="true" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@/icons/shadow.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Ombrage" />
+                     </tooltip>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#image_ConvertType">
+                     <graphic>
+                        <ImageView disable="true" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@/icons/convert.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Convertir le type" />
+                     </tooltip>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#image_threshold_adjust">
+                     <graphic>
+                        <ImageView disable="true" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@/icons/threshold_adjust.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Ajuster le seuillage" />
+                     </tooltip>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#analyze_particles">
+                     <graphic>
+                        <ImageView disable="true" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@/icons/analysis.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <tooltip>
+                        <Tooltip text="Analyser les particules" />
+                     </tooltip>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </FlowPane>
+            <StackPane fx:id="stack_current_image" alignment="CENTER" minHeight="160.0" minWidth="300.0" prefHeight="425.0" prefWidth="575.0">
+               <VBox.vgrow>
+                  <Priority fx:value="ALWAYS" />
+               </VBox.vgrow>
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
                <children>
-                  <ImageView fx:id="iv_current_image" fitHeight="425.0" fitWidth="575.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="iv_current_image" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@/empty-image.png" />
                      </image>
@@ -578,9 +721,9 @@
                   </Label>
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <FlowPane alignment="CENTER" hgap="10.0" vgap="10.0" prefHeight="100.0" minHeight="100.0" minWidth="0.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#show_image_roi_left">
+                  <Button fx:id="button_roi_left" mnemonicParsing="false" onAction="#show_image_roi_left">
                      <graphic>
                         <ImageView disable="true" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true">
                            <image>
@@ -595,7 +738,7 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </HBox.margin>
                   </Button>
-                  <Button layoutX="300.0" layoutY="11.0" mnemonicParsing="false" onAction="#show_image_roi_right">
+                  <Button fx:id="button_roi_right" layoutX="300.0" layoutY="11.0" mnemonicParsing="false" onAction="#show_image_roi_right">
                      <graphic>
                         <ImageView disable="true" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true">
                            <image>
@@ -610,7 +753,7 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </HBox.margin>
                   </Button>
-                  <Button layoutX="279.0" layoutY="11.0" mnemonicParsing="false" onAction="#show_image_roi_up">
+                  <Button fx:id="button_roi_up" layoutX="279.0" layoutY="11.0" mnemonicParsing="false" onAction="#show_image_roi_up">
                      <graphic>
                         <ImageView disable="true" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true">
                            <image>
@@ -625,7 +768,7 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </HBox.margin>
                   </Button>
-                  <Button layoutX="341.0" layoutY="11.0" mnemonicParsing="false" onAction="#show_image_roi_down">
+                  <Button fx:id="button_roi_down" layoutX="341.0" layoutY="11.0" mnemonicParsing="false" onAction="#show_image_roi_down">
                      <graphic>
                         <ImageView disable="true" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true">
                            <image>
@@ -648,12 +791,12 @@
                         <Image url="@/icons/SoftwareIcons-44-512.png" />
                      </image>
                   </ImageView>
-                  <ScrollBar fx:id="scroll_zoom" min="1.0" onMouseClicked="#show_image_roi" onMouseDragged="#show_image_roi" onMouseMoved="#show_image_roi" prefHeight="14.0" prefWidth="165.0" value="1.0">
+                  <ScrollBar fx:id="scroll_zoom" blockIncrement="1.0" max="10.0" min="1.0" prefHeight="14.0" prefWidth="70.0" unitIncrement="1.0" value="1.0">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </HBox.margin>
                   </ScrollBar>
-                  <Label fx:id="label_zoom_value" alignment="CENTER" prefHeight="18.0" prefWidth="61.0" text="1">
+                  <Label fx:id="label_zoom_value" alignment="CENTER" prefHeight="18.0" prefWidth="30.0" text="1">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </HBox.margin>
@@ -667,13 +810,13 @@
                         </ImageView>
                      </graphic>
                      <tooltip>
-                        <Tooltip text="Afficher l'image" />
+                        <Tooltip text="Zoom ROI (sélection, aperçu, enregistrement)" />
                      </tooltip>
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="button_image_statistics_rgb_roi" mnemonicParsing="false" onAction="#main_image_statistics_rgb_roi">
+                  <Button fx:id="button_image_statistics_rgb_roi" disable="true" mnemonicParsing="false" onAction="#main_image_statistics_rgb_roi">
                      <graphic>
                         <ImageView disable="true" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true">
                            <image>
@@ -684,8 +827,11 @@
                      <tooltip>
                         <Tooltip text="Statistiques RGB" />
                      </tooltip>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#reset_image_roi">
+                  <Button fx:id="button_roi_reset" mnemonicParsing="false" onAction="#reset_image_roi">
                      <graphic>
                         <ImageView disable="true" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -701,7 +847,7 @@
                      </HBox.margin>
                   </Button>
                </children>
-            </HBox>
+            </FlowPane>
          </children>
          <BorderPane.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -709,9 +855,32 @@
       </VBox>
    </center>
    <right>
-      <VBox fx:id="vbox_current_image_2" alignment="CENTER" disable="true" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <VBox fx:id="vbox_current_image_2" alignment="TOP_CENTER" disable="true" maxWidth="420.0" minWidth="280.0" prefHeight="200.0" prefWidth="360.0" fillWidth="true" BorderPane.alignment="CENTER">
          <children>
             <Label text="Histogramme">
+               <font>
+                  <Font name="Arial Black" size="20.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
+               </VBox.margin>
+            </Label>
+            <StackPane fx:id="stack_histogram" alignment="TOP_CENTER" minHeight="160.0" minWidth="240.0" prefHeight="340.0" prefWidth="340.0">
+               <VBox.vgrow>
+                  <Priority fx:value="ALWAYS" />
+               </VBox.vgrow>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+               <children>
+                  <ImageView fx:id="iv_current_histogram" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@/empty-image.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </StackPane>
+            <Label text="ROI">
                <font>
                   <Font name="Arial Black" size="20.0" />
                </font>
@@ -719,26 +888,21 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </VBox.margin>
             </Label>
-            <ImageView fx:id="iv_current_histogram" fitHeight="200.0" fitWidth="250.0" pickOnBounds="true">
+            <StackPane fx:id="stack_roi_histogram" alignment="TOP_CENTER" minHeight="160.0" minWidth="240.0" prefHeight="340.0" prefWidth="340.0">
+               <VBox.vgrow>
+                  <Priority fx:value="ALWAYS" />
+               </VBox.vgrow>
                <VBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </VBox.margin>
-               <image>
-                  <Image url="@/empty-image.png" />
-               </image></ImageView>
-            <Label layoutX="88.0" layoutY="15.0" text="ROI">
-               <font>
-                  <Font name="Arial Black" size="20.0" />
-               </font>
-            </Label>
-            <ImageView fx:id="iv_current_roi_histogram" fitHeight="200.0" fitWidth="250.0" layoutX="15.0" layoutY="235.0" pickOnBounds="true">
-               <VBox.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </VBox.margin>
-               <image>
-                  <Image url="@/empty-image.png" />
-               </image>
-            </ImageView>
+               <children>
+                  <ImageView fx:id="iv_current_roi_histogram" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@/empty-image.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </StackPane>
          </children>
          <BorderPane.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -746,3 +910,6 @@
       </VBox>
    </right>
 </BorderPane>
+
+
+

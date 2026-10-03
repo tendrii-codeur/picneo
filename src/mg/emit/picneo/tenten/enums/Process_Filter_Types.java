@@ -4,7 +4,7 @@ import ij.plugin.filter.RankFilters;
 
 public enum Process_Filter_Types {
 
-	MEAN("Moyenne", RankFilters.MEAN), 
+	MOYEN("MOYEN", RankFilters.MEAN), 
 	MIN("Min", RankFilters.MIN), 
 	MAX("Max", RankFilters.MAX),
 	VARIANCE("Variance", RankFilters.VARIANCE),

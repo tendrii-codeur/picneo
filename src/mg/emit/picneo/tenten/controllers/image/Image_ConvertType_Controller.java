@@ -1,5 +1,8 @@
 package mg.emit.picneo.tenten.controllers.image;
 
+import mg.emit.picneo.tenten.controllers.Tool_Dialog_Controller;
+import mg.emit.picneo.tenten.util.TitleBar_Util;
+
 import ij.ImagePlus;
 import ij.process.ImageConverter;
 import javafx.embed.swing.SwingFXUtils;
@@ -15,8 +18,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import mg.emit.picneo.tenten.util.Alert_Util;
 
-public class Image_ConvertType_Controller {
+public class Image_ConvertType_Controller implements Tool_Dialog_Controller {
 
 	@FXML
 	public Button button_adjust;
@@ -55,12 +59,10 @@ public class Image_ConvertType_Controller {
 	
 	private ImagePlus image = new ImagePlus();
 	private ImagePlus image_preview_ip = new ImagePlus();
-	private double dragOffsetX;
-	private double dragOffsetY;
 
 	@FXML
 	public void initialize() {
-		bindTitleBar();
+		TitleBar_Util.bind(title_bar, button_exit);
 	}
 	
 	@FXML
@@ -140,6 +142,7 @@ public class Image_ConvertType_Controller {
 
 	private void updatePreviewAfterConversion() {
 		showImagePreview(image_preview_ip);
+		updateTypeButtons(image_preview_ip);
 		button_adjust.setDisable(false);
 	}
 
@@ -169,13 +172,46 @@ public class Image_ConvertType_Controller {
 		
 		Alert alert = new Alert(AlertType.ERROR, message, ButtonType.OK);
 		alert.setTitle("Erreur de conversion de type d'image !");
+		Alert_Util.style(alert);
 		alert.showAndWait();
 	}
 	
 	public void setImage(ImagePlus ip) {
 		this.image = ip.duplicate();
 		showImagePreview(this.image);
+		updateTypeButtons(this.image);
 		button_adjust.setDisable(true);
+	}
+
+	/**
+	 * Grise le bouton du type actuel de l'image (ex. RGB si l'image est RGB),
+	 * pour éviter les conversions sans effet. Les autres boutons restent actifs.
+	 */
+	private void updateTypeButtons(ImagePlus ip) {
+		if (button_gray_8_bit == null || button_gray_16_bit == null
+				|| button_gray_32_bit == null || button_rgb == null || ip == null) {
+			return;
+		}
+		button_gray_8_bit.setDisable(false);
+		button_gray_16_bit.setDisable(false);
+		button_gray_32_bit.setDisable(false);
+		button_rgb.setDisable(false);
+		switch (ip.getType()) {
+			case ImagePlus.GRAY8:
+				button_gray_8_bit.setDisable(true);
+				break;
+			case ImagePlus.GRAY16:
+				button_gray_16_bit.setDisable(true);
+				break;
+			case ImagePlus.GRAY32:
+				button_gray_32_bit.setDisable(true);
+				break;
+			case ImagePlus.COLOR_RGB:
+				button_rgb.setDisable(true);
+				break;
+			default:
+				break;
+		}
 	}
 
 	@FXML
@@ -189,22 +225,6 @@ public class Image_ConvertType_Controller {
 		}
 	}
 
-	private void bindTitleBar() {
-		button_exit.setOnMouseEntered(event -> button_exit.setStyle(
-				"-fx-background-color: #F1707A; -fx-background-radius: 0; -fx-border-width: 0; -fx-cursor: hand;"));
-		button_exit.setOnMouseExited(event -> button_exit.setStyle(
-				"-fx-background-color: #E81123; -fx-background-radius: 0; -fx-border-width: 0; -fx-cursor: hand;"));
-
-		title_bar.setOnMousePressed(event -> {
-			dragOffsetX = event.getSceneX();
-			dragOffsetY = event.getSceneY();
-		});
-		title_bar.setOnMouseDragged(event -> {
-			Stage stage = (Stage) button_exit.getScene().getWindow();
-			stage.setX(event.getScreenX() - dragOffsetX);
-			stage.setY(event.getScreenY() - dragOffsetY);
-		});
-	}
 	
 	public Boolean getStageClosedOnExit() {
 		return stage_closed_on_exit_status;

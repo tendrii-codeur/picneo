@@ -1,5 +1,7 @@
 package mg.emit.picneo.tenten.controllers;
 
+import mg.emit.picneo.tenten.util.TitleBar_Util;
+
 import ij.ImagePlus;
 import ij.gui.HistogramWindow;
 import ij.plugin.ChannelSplitter;
@@ -14,7 +16,7 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import mg.emit.picneo.tenten.util.FrenchHistogramWindow;
 
-public class Main_Image_Statistics_RGB_Controller {
+public class Main_Image_Statistics_RGB_Controller implements Tool_Dialog_Controller {
 
 	@FXML
 	public Button button_exit;
@@ -49,32 +51,9 @@ public class Main_Image_Statistics_RGB_Controller {
 	private ImagePlus image_green = new ImagePlus();
 	private ImagePlus image_blue = new ImagePlus();
 
-	private double dragOffsetX;
-	private double dragOffsetY;
-	
 	@FXML
 	public void initialize() {
-		button_exit.setOnMouseEntered(event -> button_exit.setStyle(
-				"-fx-background-color: #F1707A; -fx-background-radius: 0; -fx-border-width: 0; -fx-cursor: hand;"));
-		button_exit.setOnMouseExited(event -> button_exit.setStyle(
-				"-fx-background-color: #E81123; -fx-background-radius: 0; -fx-border-width: 0; -fx-cursor: hand;"));
-
-		title_bar.setOnMousePressed(event -> {
-			Stage stage = getStage();
-			if (stage == null) {
-				return;
-			}
-			dragOffsetX = event.getSceneX();
-			dragOffsetY = event.getSceneY();
-		});
-		title_bar.setOnMouseDragged(event -> {
-			Stage stage = getStage();
-			if (stage == null) {
-				return;
-			}
-			stage.setX(event.getScreenX() - dragOffsetX);
-			stage.setY(event.getScreenY() - dragOffsetY);
-		});
+		TitleBar_Util.bind(title_bar, button_exit, this::getStage);
 	}
 
 	@FXML
@@ -94,7 +73,7 @@ public class Main_Image_Statistics_RGB_Controller {
 	
 	public void show_rgb_image() {
 		
-		ImagePlus[] images_rgb = ChannelSplitter.split(image);
+		ImagePlus[] images_rgb = splitChannelsSafe(image);
 		
 		image_red = images_rgb[0].duplicate();
 		image_green = images_rgb[1].duplicate();
@@ -152,6 +131,28 @@ public class Main_Image_Statistics_RGB_Controller {
 		
 		this.image = ip.duplicate();
 		show_rgb_image();
+	}
+
+	/**
+	 * Découpe en canaux sans planter sur les images non-RGB
+	 * (niveaux de gris : le même canal est montré en R, V et B).
+	 */
+	private ImagePlus[] splitChannelsSafe(ImagePlus ip) {
+		ImagePlus[] fallback = new ImagePlus[]{
+				ip.duplicate(), ip.duplicate(), ip.duplicate()};
+		ImagePlus[] split = null;
+		try {
+			split = ChannelSplitter.split(ip);
+		} catch (Exception e) {
+			split = null;
+		}
+		if (split == null || split.length == 0 || split[0] == null) {
+			return fallback;
+		}
+		ImagePlus red = split[0];
+		ImagePlus green = split.length > 1 && split[1] != null ? split[1] : ip.duplicate();
+		ImagePlus blue = split.length > 2 && split[2] != null ? split[2] : ip.duplicate();
+		return new ImagePlus[]{red, green, blue};
 	}
 
 	private void setPreview(ImageView view, Image preview, double width, double height) {

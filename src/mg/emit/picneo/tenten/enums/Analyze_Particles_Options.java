@@ -22,6 +22,11 @@ public enum Analyze_Particles_Options {
 	public Integer getDisplayOptionValue() {
 		return displayOptionValue;
 	}
+
+	@Override
+	public String toString() {
+		return displayOptionName;
+	}
 	
 	
 }

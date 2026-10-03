@@ -1,5 +1,8 @@
 package mg.emit.picneo.tenten.controllers.image;
 
+import mg.emit.picneo.tenten.controllers.Tool_Dialog_Controller;
+import mg.emit.picneo.tenten.util.TitleBar_Util;
+
 import ij.ImagePlus;
 import ij.gui.HistogramWindow;
 import ij.process.ImageProcessor;
@@ -15,7 +18,7 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import mg.emit.picneo.tenten.util.FrenchHistogramWindow;
 
-public class Image_BrightnessContrast_Adjust_Controller {
+public class Image_BrightnessContrast_Adjust_Controller implements Tool_Dialog_Controller {
 
 	@FXML 
 	public Button button_adjust;
@@ -63,9 +66,7 @@ public class Image_BrightnessContrast_Adjust_Controller {
 	
 	private ImagePlus image = new ImagePlus();
 	private ImagePlus image_preview_ip = new ImagePlus();
-	private double dragOffsetX;
-	private double dragOffsetY;
-	
+
 	@FXML
 	public void initialize(){
 
@@ -89,7 +90,7 @@ public class Image_BrightnessContrast_Adjust_Controller {
 			updateActionButtonsEnabled();
 		});
 
-		bindTitleBar();
+		TitleBar_Util.bind(title_bar, button_exit);
     }
 	
 	@FXML
@@ -162,29 +163,18 @@ public class Image_BrightnessContrast_Adjust_Controller {
 		}
 	}
 
-	private void bindTitleBar() {
-		button_exit.setOnMouseEntered(event -> button_exit.setStyle(
-				"-fx-background-color: #F1707A; -fx-background-radius: 0; -fx-border-width: 0; -fx-cursor: hand;"));
-		button_exit.setOnMouseExited(event -> button_exit.setStyle(
-				"-fx-background-color: #E81123; -fx-background-radius: 0; -fx-border-width: 0; -fx-cursor: hand;"));
-
-		title_bar.setOnMousePressed(event -> {
-			dragOffsetX = event.getSceneX();
-			dragOffsetY = event.getSceneY();
-		});
-		title_bar.setOnMouseDragged(event -> {
-			Stage stage = (Stage) button_exit.getScene().getWindow();
-			stage.setX(event.getScreenX() - dragOffsetX);
-			stage.setY(event.getScreenY() - dragOffsetY);
-		});
-	}
 
 	public boolean getStageClosedOnExit() {
 		return stage_closed_on_exit_status;
 	}
 	
 	public ImageProcessor getImageProcessor() {
-		return image_preview_ip.getProcessor();
+		// Toujours recalculer depuis les valeurs courantes : l'aperçu n'est
+		// rafraîchi qu'au survol souris, ce qui donnerait un résultat périmé si
+		// les curseurs ont été modifiés au clavier.
+		ImagePlus adjusted = image.duplicate();
+		adjusted.getProcessor().setMinAndMax(min_current_value, max_current_value);
+		return adjusted.getProcessor();
 	}
 	
 }

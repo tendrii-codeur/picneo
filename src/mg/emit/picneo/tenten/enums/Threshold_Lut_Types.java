@@ -25,5 +25,10 @@ public enum Threshold_Lut_Types {
 		return displayLutValue;
 	}
 
+	@Override
+	public String toString() {
+		return displayLutName;
+	}
+
 	
 }
